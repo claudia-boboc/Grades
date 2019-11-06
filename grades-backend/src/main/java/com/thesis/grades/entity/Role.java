@@ -1,10 +1,17 @@
 package com.thesis.grades.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import com.thesis.grades.model.PermissionsEnum;
 
@@ -19,8 +26,11 @@ public class Role {
 	@Column(nullable = false, unique = true)
     private String name;
  
-    @Column(nullable = false)
+	@Enumerated(EnumType.STRING)
     private PermissionsEnum permission;
+    
+    @OneToOne(mappedBy = "userRole")
+    private User gradesUser;
 
 	public Long getId() {
 		return id;
@@ -38,6 +48,8 @@ public class Role {
 		this.name = name;
 	}
 
+	
+
 	public PermissionsEnum getPermission() {
 		return permission;
 	}
@@ -45,6 +57,16 @@ public class Role {
 	public void setPermission(PermissionsEnum permission) {
 		this.permission = permission;
 	}
+
+	public User getGradesUser() {
+		return gradesUser;
+	}
+
+	public void setGradesUser(User gradesUser) {
+		this.gradesUser = gradesUser;
+	}
+
+	
     
     
 

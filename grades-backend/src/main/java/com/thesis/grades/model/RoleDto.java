@@ -1,9 +1,11 @@
 package com.thesis.grades.model;
 
+import java.util.List;
+
 public class RoleDto {
 	private Long id;
 	private String name;
-	private PermissionsEnum permissions;
+	private PermissionsEnum permission;
 	
 	public Long getId() {
 		return id;
@@ -17,12 +19,14 @@ public class RoleDto {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public PermissionsEnum getPermissions() {
-		return permissions;
+	public PermissionsEnum getPermission() {
+		return permission;
 	}
-	public void setPermissions(PermissionsEnum permissions) {
-		this.permissions = permissions;
+	public void setPermission(PermissionsEnum permission) {
+		this.permission = permission;
 	}
+	
+	
 	
 	
 }

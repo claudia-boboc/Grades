@@ -1,10 +1,13 @@
 package com.thesis.grades.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class User {
@@ -15,8 +18,9 @@ public class User {
 	@Column(nullable = false, unique = true)
     private String name;
  
-    @Column(nullable = false)
-    private String role;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_role_id", referencedColumnName = "id")
+    private Role userRole;
 
 	public Long getId() {
 		return id;
@@ -34,13 +38,17 @@ public class User {
 		this.name = name;
 	}
 
-	public String getRole() {
-		return role;
+	public Role getUserRole() {
+		return userRole;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setUserRole(Role userRole) {
+		this.userRole = userRole;
 	}
+
+	
+
+
 
 
 }

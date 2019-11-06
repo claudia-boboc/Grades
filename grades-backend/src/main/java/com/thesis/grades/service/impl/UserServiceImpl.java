@@ -8,10 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-
+import com.thesis.grades.entity.Role;
 import com.thesis.grades.entity.User;
-
+import com.thesis.grades.model.RoleDto;
 import com.thesis.grades.model.UserDto;
+import com.thesis.grades.repository.RoleRepository;
 import com.thesis.grades.repository.UserRepository;
 import com.thesis.grades.service.UserService;
 import com.thesis.grades.util.Mapper;
@@ -22,6 +23,9 @@ public class UserServiceImpl implements UserService{
 
 		@Autowired
 		private UserRepository userRepository;
+		
+		@Autowired
+		private RoleRepository roleRepository;;
 		
 		@Override
 		public List<UserDto> findAll() {
@@ -40,6 +44,62 @@ public class UserServiceImpl implements UserService{
 		public UserDto findUserById(Long id) {
 			UserDto dto = Mapper.mapUserToDto(this.userRepository.findById(id).orElse(null));
 			return dto;
+		}
+
+		@Override
+		public UserDto update(UserDto userDto) {
+			User foundUser = this.userRepository.findById(userDto.getId()).orElse(null);
+			if(foundUser == null) {
+				return this.addUser(userDto);
+			}
+			User user = Mapper.mapUserDtoToEntity(userDto);
+			if(user.getName() != null && !user.getName().isEmpty()) {
+				foundUser.setName(user.getName());
+			}
+			if(user.getUserRole() != null) {
+				foundUser.setUserRole(user.getUserRole());
+			}
+			return Mapper.mapUserToDto(this.userRepository.save(foundUser));
+			
+			
+		}
+
+		@Override
+		public UserDto deleteById(Long id) {
+			User foundUser = this.userRepository.findById(id).orElse(null);
+			if(foundUser == null) {
+				return null;
+			}
+			this.userRepository.delete(foundUser);
+			
+			return Mapper.mapUserToDto(foundUser);		}
+
+		@Override
+		public RoleDto getUserRole(Long id) {
+			User user = this.userRepository.findById(id).orElse(null);
+			if(user == null) {
+				return null;
+			}
+			if(user.getUserRole() != null) {
+				return Mapper.mapRoleToDto(user.getUserRole());
+			}
+			
+			return null;
+		}
+
+		@Override
+		public UserDto addRoleToUser(Long userId, Long roleId) {
+			User user = this.userRepository.findById(userId).orElse(null);
+			if(user == null) {
+				return null;
+			}
+			
+			Role role = this.roleRepository.findById(roleId).orElse(null);
+			if(role != null) {
+				user.setUserRole(role);
+			}
+			
+			return Mapper.mapUserToDto(this.userRepository.save(user));
 		}
 		
 	}
