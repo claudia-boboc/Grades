@@ -49,8 +49,8 @@ public class RoleServiceImpl implements RoleService{
 		if(role.getName() != null && !role.getName().isEmpty()) {
 			foundRole.setName(role.getName());
 		}
-		if(role.getPermission() != null) {
-			foundRole.setPermission(role.getPermission());
+		if(role.getPermissions() != null) {
+			foundRole.setPermissions(role.getPermissions());
 		}
 		return Mapper.mapRoleToDto(this.roleRepository.save(foundRole));
 		

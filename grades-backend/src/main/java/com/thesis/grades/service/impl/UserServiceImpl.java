@@ -37,6 +37,14 @@ public class UserServiceImpl implements UserService{
 		@Override
 		public UserDto addUser(UserDto userDto) {
 			User user = Mapper.mapUserDtoToEntity(userDto);
+			if(user.getRole() != null) {
+				Long id = user.getRole().getId();
+				user.setRole(null);
+				
+				User savedUser = this.userRepository.save(user);
+				return this.addRoleToUser(savedUser.getId(), id);
+				
+			}
 			return Mapper.mapUserToDto(this.userRepository.save(user));
 		}
 		
@@ -56,8 +64,8 @@ public class UserServiceImpl implements UserService{
 			if(user.getName() != null && !user.getName().isEmpty()) {
 				foundUser.setName(user.getName());
 			}
-			if(user.getUserRole() != null) {
-				foundUser.setUserRole(user.getUserRole());
+			if(user.getRole() != null) {
+				foundUser.setRole(user.getRole());
 			}
 			return Mapper.mapUserToDto(this.userRepository.save(foundUser));
 			
@@ -80,8 +88,8 @@ public class UserServiceImpl implements UserService{
 			if(user == null) {
 				return null;
 			}
-			if(user.getUserRole() != null) {
-				return Mapper.mapRoleToDto(user.getUserRole());
+			if(user.getRole() != null) {
+				return Mapper.mapRoleToDto(user.getRole());
 			}
 			
 			return null;
@@ -96,7 +104,7 @@ public class UserServiceImpl implements UserService{
 			
 			Role role = this.roleRepository.findById(roleId).orElse(null);
 			if(role != null) {
-				user.setUserRole(role);
+				user.setRole(role);
 			}
 			
 			return Mapper.mapUserToDto(this.userRepository.save(user));

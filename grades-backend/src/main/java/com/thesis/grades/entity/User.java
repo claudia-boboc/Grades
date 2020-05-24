@@ -8,8 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "\"user\"")
 public class User {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,9 +20,9 @@ public class User {
 	@Column(nullable = false, unique = true)
     private String name;
  
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_role_id", referencedColumnName = "id")
-    private Role userRole;
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    private Role role;
 
 	public Long getId() {
 		return id;
@@ -38,17 +40,12 @@ public class User {
 		this.name = name;
 	}
 
-	public Role getUserRole() {
-		return userRole;
+	public Role getRole() {
+		return role;
 	}
 
-	public void setUserRole(Role userRole) {
-		this.userRole = userRole;
+	public void setRole(Role role) {
+		this.role = role;
 	}
-
-	
-
-
-
 
 }

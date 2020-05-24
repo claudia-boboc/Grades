@@ -14,7 +14,7 @@ public class Mapper {
 		RoleDto dto = new RoleDto();
 		dto.setId(role.getId());
 		dto.setName(role.getName());
-		dto.setPermission(role.getPermission());
+		dto.setPermissions(role.getPermissions());
 		
 		return dto;
 	}
@@ -27,8 +27,8 @@ public class Mapper {
 		if(dto.getName() != null && !dto.getName().isEmpty()) {
 			role.setName(dto.getName());
 		}
-		if(dto.getPermission() != null) {
-			role.setPermission(dto.getPermission());
+		if(dto.getPermissions() != null && !dto.getPermissions().isEmpty()) {
+			role.setPermissions(dto.getPermissions());
 		}
 		if(dto.getId() != null) {
 			role.setId(dto.getId());
@@ -45,7 +45,7 @@ public class Mapper {
 		UserDto dto = new UserDto();
 		dto.setId(user.getId());
 		dto.setName(user.getName());
-		dto.setRole(Mapper.mapRoleToDto(user.getUserRole()));
+		dto.setRole(Mapper.mapRoleToDto(user.getRole()));
 		
 		return dto;
 	}
@@ -57,7 +57,7 @@ public class Mapper {
 		}
 		if(dto.getRole() != null)
 		{
-			user.setUserRole(Mapper.mapRoleDtoToEntity(dto.getRole()));
+			user.setRole(Mapper.mapRoleDtoToEntity(dto.getRole()));
 		}
 		 return user;
 		 

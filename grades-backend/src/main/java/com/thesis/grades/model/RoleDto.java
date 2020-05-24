@@ -5,7 +5,7 @@ import java.util.List;
 public class RoleDto {
 	private Long id;
 	private String name;
-	private PermissionsEnum permission;
+	private List<PermissionsEnum> permissions;
 	
 	public Long getId() {
 		return id;
@@ -19,11 +19,11 @@ public class RoleDto {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public PermissionsEnum getPermission() {
-		return permission;
+	public List<PermissionsEnum> getPermissions() {
+		return this.permissions;
 	}
-	public void setPermission(PermissionsEnum permission) {
-		this.permission = permission;
+	public void setPermissions(List<PermissionsEnum> permissions) {
+		this.permissions = permissions;
 	}
 	
 	
