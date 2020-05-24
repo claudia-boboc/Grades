@@ -1,20 +1,67 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UsersBoardComponent } from './routes/main/config/user/users-board/users-board.component';
+import { HomeComponent } from './routes/main/home/home.component';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSidenavModule, MatListModule, MatCard, MatCardModule, MatFormField, MatFormFieldModule, MatSelectModule, MatChipsModule, MatAutocompleteModule, MatInputModule } from '@angular/material';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule, MatIcon } from '@angular/material/icon';
+import { UserFormComponent } from './routes/main/config/user/users-board/user-form/user-form.component'
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { RoleFormComponent } from './routes/main/config/user/users-board/role-form/role-form.component';
+import { HttpClientModule } from '@angular/common/http';
+import { UserService } from './routes/main/config/user/users.service';
+import { LoginComponent } from './routes/main/login/login.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { CatalogComponent } from './routes/main/catalog/catalog.component';
+import { MatTableModule } from '@angular/material/table';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    UsersBoardComponent
+    UsersBoardComponent,
+    HomeComponent,
+    UserFormComponent,
+    RoleFormComponent,
+    LoginComponent,
+    CatalogComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    MatMenuModule,
+    MatExpansionModule,
+    MatSidenavModule,
+    MatListModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    HttpClientModule,
+    MatCheckboxModule,
+    MatTableModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [UserService],
+  bootstrap: [AppComponent],
+  exports: [HomeComponent]
 })
 export class AppModule { }

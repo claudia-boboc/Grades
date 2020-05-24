@@ -1,1 +1,21 @@
-<p>users-board works!</p>
+<button mat-raised-button color="primary" (click)="onShowRoleForm()">Add roles</button>
+<button mat-raised-button color="primary" (click)="onShowUserForm()">Add user</button>
+<div *ngIf="showForm$ | async as form">
+    <ng-container [ngSwitch]="form">
+        <ng-container *ngSwitchCase="'USER_FORM'">
+            <app-user-form [roles]="roles$ | async" (closed)="onCancel()" (saved)="onSaveUser($event)"></app-user-form>
+
+        </ng-container>
+        <ng-container *ngSwitchCase="'ROLE_FORM'">
+            <app-role-form (closed)="onCancel()" (saved)="onSaveRole($event)"></app-role-form>
+        </ng-container>
+
+        <mat-list >
+            <mat-list-item *ngFor="let role of roles$ | async">{{role.name}}</mat-list-item>
+          </mat-list>
+    </ng-container>
+
+    <mat-list >
+        <mat-list-item *ngFor="let user of users$ | async">{{user.name}}</mat-list-item>
+      </mat-list>
+</div>

@@ -1,0 +1,14 @@
+@import '~@angular/material/theming';
+
+$primary: mat-palette($mat-indigo);
+
+
+.form-card {
+    max-width: 400px;
+    border: 2px solid mat-color($primary);
+    border-radius: 30px !important;
+  }
+
+  .full-width {
+    width: 100%;
+  }

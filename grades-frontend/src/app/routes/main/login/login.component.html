@@ -1,0 +1,26 @@
+<div class="main">
+
+    <img src="https://webgradients.com/public/webgradients_png/008%20Rainy%20Ashville.png">
+    <mat-card class="login-card">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <h2>Login</h2>
+            <mat-form-field>
+                <input formControlName="email" type="email" matInput placeholder="E-mail" class="login_input">
+                <mat-icon matSuffix aria-hidden="false">perm_identity</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input formControlName="password" type="password" [type]="hide ? 'password':'text'" matInput
+                    placeholder="Password">
+                <mat-icon matSuffix aria-hidden="false">lock</mat-icon>
+            </mat-form-field>
+            <br>
+
+
+            <mat-checkbox matSuffix (click)="hide = !hide">Show password</mat-checkbox>
+            <br>
+            <button type="submit" [disabled]='!loginForm.valid' mat-flat-button>SIGN IN</button>
+
+        </form>
+    </mat-card>
+</div>
