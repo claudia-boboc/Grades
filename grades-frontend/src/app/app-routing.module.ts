@@ -4,13 +4,15 @@ import { HomeComponent } from './routes/main/home/home.component';
 import { UsersBoardComponent } from './routes/main/config/user/users-board/users-board.component';
 import { LoginComponent } from './routes/main/login/login.component';
 import { CatalogComponent } from './routes/main/catalog/catalog.component';
+import { TeacherCatalogComponent } from './routes/main/teacher-catalog/teacher-catalog.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'config', component: UsersBoardComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'catalog', component: CatalogComponent }
+  { path: 'catalog', component: CatalogComponent },
+  { path: 'teachercatalog', component: TeacherCatalogComponent }
 ];
 
 @NgModule({

@@ -8,7 +8,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatSidenavModule, MatListModule, MatCard, MatCardModule, MatFormField, MatFormFieldModule, MatSelectModule, MatChipsModule, MatAutocompleteModule, MatInputModule } from '@angular/material';
+import { MatSidenavModule, MatListModule, MatCard, MatCardModule, MatFormField, MatFormFieldModule, MatSelectModule, MatChipsModule, MatAutocompleteModule, MatInputModule, MatDialogModule } from '@angular/material';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -24,6 +24,9 @@ import { LoginComponent } from './routes/main/login/login.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CatalogComponent } from './routes/main/catalog/catalog.component';
 import { MatTableModule } from '@angular/material/table';
+import { TeacherCatalogComponent } from './routes/main/teacher-catalog/teacher-catalog.component';
+import { AddGradeComponent } from './routes/main/add-grade/add-grade.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 
 @NgModule({
@@ -34,7 +37,9 @@ import { MatTableModule } from '@angular/material/table';
     UserFormComponent,
     RoleFormComponent,
     LoginComponent,
-    CatalogComponent
+    CatalogComponent,
+    TeacherCatalogComponent,
+    AddGradeComponent
   ],
   imports: [
     BrowserModule,
@@ -58,10 +63,13 @@ import { MatTableModule } from '@angular/material/table';
     MatInputModule,
     HttpClientModule,
     MatCheckboxModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule,
+    MatDatepickerModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent],
+  entryComponents: [AddGradeComponent],
   exports: [HomeComponent]
 })
 export class AppModule { }
