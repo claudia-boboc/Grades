@@ -7,8 +7,10 @@ export interface Catalog {
 }
 
 const CATALOG_DATA: Catalog[] = [
-  { object: 'Matematica', grades: [8], mean: 8 },
-  { object: 'Limba si literatura romana', grades: [8], mean: 8 }
+  { object: 'Matematica', grades: [8, 6], mean: 7 },
+  { object: 'Limba si literatura romana', grades: [8, 10], mean: 9 },
+  { object: 'Limba engleză', grades: [6, 10], mean: 8 },
+  { object: 'Limba franceză', grades: [5, 9], mean: 7 }
 ]
 @Component({
   selector: 'app-catalog',

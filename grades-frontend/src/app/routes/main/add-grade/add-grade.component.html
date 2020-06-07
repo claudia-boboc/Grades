@@ -1,23 +1,32 @@
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
+<!-- <h1 mat-dialog-title>Hi {{student.name}}</h1> -->
 
-<mat-label>Choose a date</mat-label>
-<!-- <input matInput [matDatepicker]="picker"> -->
+<!-- <mat-label>Choose a date</mat-label>
+<input matInput [matDatepicker]="picker">
 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-<!-- <mat-datepicker #picker></mat-datepicker> -->
+<mat-datepicker #picker></mat-datepicker> -->
+<div class="dialog_container">
 
-<div mat-dialog-content>
-    <mat-form-field>
-        <p>Grade</p>
-        <mat-label>Grade</mat-label>
-        <input type="number" min="1" max="10">
-    </mat-form-field>
+    <form [formGroup]="form">
+        <div mat-dialog-content>
+            <mat-form-field *ngIf="action != 'Delete'; else elseTemplate">
+                <input autocomplete="off" type="number" min="1" max="10" matInput placeholder="Grade"
+                    formControlName="grade">
 
-    <!-- <mat-form-field>
-        <mat-label>Favorite Animal</mat-label>
-        <input matInput [(ngModel)]="data.animal">
-    </mat-form-field> -->
-</div>
-<div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+            </mat-form-field>
+            <mat-form-field class="date" *ngIf="action != 'Delete'; else ">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+    </form>
+
+    <ng-template #elseTemplate>
+        Sure to delete <b>{{grade.grade}}</b>?
+    </ng-template>
+    <div mat-dialog-action class="buttons">
+        <button mat-button (click)="doAction()">{{action}}</button>
+        <button mat-button (click)="closeDialog()" cdkFocusInitial>cancel</button>
+    </div>
 </div>

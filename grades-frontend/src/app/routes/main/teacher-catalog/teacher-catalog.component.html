@@ -12,7 +12,7 @@
             </mat-expansion-panel-header>
 
             <div>
-                <mat-table #table [dataSource]="student.grades">
+                <mat-table #table [dataSource]="student.grades" #mytable>
                     <ng-container matColumnDef="position">
                         <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
                         <mat-cell *matCellDef="let element"> {{element.number}} </mat-cell>
@@ -31,10 +31,11 @@
                     <ng-container matColumnDef="actions">
                         <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
                         <mat-cell *matCellDef="let element">
-                            <button mat-raised-button (click)="openDialog()">
-                                <mat-icon>edit</mat-icon>
+                            <button mat-icon-button (click)="openDialog('Update',element,student.id)">
+                                <mat-icon class="edit">edit</mat-icon>
                             </button>
-                            <button mat-raised-button (click)="openDialog()">
+
+                            <button mat-icon-button (click)="openDialog('Delete',element,student.id)">
                                 <mat-icon>delete</mat-icon>
                             </button>
                         </mat-cell>
@@ -43,11 +44,13 @@
                     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
                 </mat-table>
-                <button id="btn" mat-raised-button (click)="openDialog()">
-                    <mat-icon>add</mat-icon>add
+
+                <button class="btn" mat-stroked-button (click)="openDialog('Add', {}, student.id)">
+                    Add
                 </button>
             </div>
         </mat-expansion-panel>
     </mat-accordion>
+
 
 </div>
