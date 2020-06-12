@@ -15,8 +15,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "class")
-public class Class {
+@Table(name = "school_class")
+public class SchoolClass {
 	
 	@Id
 	@GeneratedValue(strategy = AUTO)
@@ -37,7 +37,7 @@ public class Class {
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Course> courses = new ArrayList<Course>();
 	
-	public Class(Integer id, List<Student> students, List<Teacher> teachers, HomeroomTeacher homeroomTeacher, Catalog catalog,
+	public SchoolClass(Integer id, List<Student> students, List<Teacher> teachers, HomeroomTeacher homeroomTeacher, Catalog catalog,
 			List<Course> courses) {
 		super();
 		this.id = id;
@@ -48,7 +48,7 @@ public class Class {
 		this.courses = courses;
 	}
 
-	public Class() {
+	public SchoolClass() {
 		super();
 	}
 	

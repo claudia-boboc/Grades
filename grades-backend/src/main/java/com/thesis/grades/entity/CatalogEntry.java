@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 
 @Entity
-@Table(name = "catalogEntry")
+@Table(name = "catalog_entry")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class CatalogEntry {
 

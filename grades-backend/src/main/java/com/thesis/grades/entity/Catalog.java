@@ -24,12 +24,12 @@ public class Catalog {
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "classroom_id", referencedColumnName = "id")
-	private Class classroom;
+	private SchoolClass classroom;
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<CatalogEntry> entry = new ArrayList<CatalogEntry>();
 	
-	public Catalog(Class classroom, List<CatalogEntry> entry) {
+	public Catalog(SchoolClass classroom, List<CatalogEntry> entry) {
 		super();
 		this.classroom = classroom;
 		this.entry = entry;
@@ -44,10 +44,10 @@ public class Catalog {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Class getClassroom() {
+	public SchoolClass getClassroom() {
 		return classroom;
 	}
-	public void setClassroom(Class classroom) {
+	public void setClassroom(SchoolClass classroom) {
 		this.classroom = classroom;
 	}
 	public List<CatalogEntry> getEntry() {

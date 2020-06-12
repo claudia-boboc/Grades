@@ -1,15 +1,14 @@
 package com.thesis.grades.model;
 
 public class AddRoleToUserRequest {
-	private Long roleId;
+	private String role;
 
-	public Long getRoleId() {
-		return roleId;
+	public String getRole() {
+		return role;
 	}
 
-	public void setRoleId(Long roleId) {
-		this.roleId = roleId;
+	public void setRole(String role) {
+		this.role = role;
 	}
 
-	
 }

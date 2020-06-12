@@ -15,16 +15,16 @@ public class HomeroomTeacher extends Teacher {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "classroom_id", referencedColumnName = "id")
-	private Class classroom;
+	private SchoolClass classroom;
 
 	public HomeroomTeacher(Integer id, String surname, String firstName, String sex, Date dateOfBirth, Course course,
-			List<Class> classrooms, Class classroom) {
+			List<SchoolClass> classrooms, SchoolClass classroom) {
 		super(id, surname, firstName, sex, dateOfBirth, course, classrooms);
 		this.classroom = classroom;
 	}
 
 	public HomeroomTeacher(Integer id, String surname, String firstName, String sex, Date dateOfBirth, Course course,
-			List<Class> classrooms) {
+			List<SchoolClass> classrooms) {
 		super(id, surname, firstName, sex, dateOfBirth, course, classrooms);
 	}
 	
@@ -32,11 +32,11 @@ public class HomeroomTeacher extends Teacher {
 		super();
 	}
 
-	public Class getClassroom() {
+	public SchoolClass getClassroom() {
 		return classroom;
 	}
 
-	public void setClassroom(Class classroom) {
+	public void setClassroom(SchoolClass classroom) {
 		this.classroom = classroom;
 	}
 

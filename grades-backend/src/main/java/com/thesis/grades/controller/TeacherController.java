@@ -21,7 +21,7 @@ import com.thesis.grades.service.TeacherService;
 @RequestMapping("/grades/teachers")
 public class TeacherController {
 
-	@Autowired
+	//@Autowired
 	private TeacherService teacherService;
 	
 	@GetMapping

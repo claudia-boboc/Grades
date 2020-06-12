@@ -30,6 +30,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { CdkTableModule } from '@angular/cdk/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { CdkTableModule } from '@angular/cdk/table';
     MatDatepickerModule,
     MatNativeDateModule,
     AngularFireDatabaseModule,
-    CdkTableModule
+    CdkTableModule,
+    MatTooltipModule
   ],
 
   providers: [UserService],

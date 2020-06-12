@@ -1,7 +1,11 @@
 package com.thesis.grades.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,11 +22,13 @@ public class User {
     private Long id;
 	
 	@Column(nullable = false, unique = true)
-    private String name;
+    private String username;
+	
+	@Column(nullable = false)
+    private String password;
  
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "role_id", referencedColumnName = "id")
-    private Role role;
+	@ElementCollection
+    private List<String> roles = new ArrayList<String>();
 
 	public Long getId() {
 		return id;
@@ -32,20 +38,28 @@ public class User {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public Role getRole() {
-		return role;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setRole(Role role) {
-		this.role = role;
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public List<String> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
 	}
 
 }

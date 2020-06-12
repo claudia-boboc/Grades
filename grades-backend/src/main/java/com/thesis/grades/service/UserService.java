@@ -2,22 +2,20 @@ package com.thesis.grades.service;
 
 import java.util.List;
 
-import com.thesis.grades.model.RoleDto;
-import com.thesis.grades.model.UserDto;
+import com.thesis.grades.entity.User;
 
 public interface UserService {
 
-	List<UserDto> findAll();
-	UserDto addUser(UserDto userDto);
+	List<User> findAll();
 	
-	UserDto findUserById(Long id);
+	User addUser(User user);
 	
-	UserDto update(UserDto userDto);
+	User findUserById(Long id);
 	
-	UserDto deleteById(Long id);
+	User saveOrUpdate(User user);
 	
-	RoleDto getUserRole(Long id);
+	User deleteById(Long id);
 	
-	UserDto addRoleToUser(Long userId, Long roleId);
+	User addRoleToUser(Long userId, String role);
 	
 }

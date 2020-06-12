@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.thesis.grades.entity.User;
 import com.thesis.grades.model.AddRoleToUserRequest;
-import com.thesis.grades.model.RoleDto;
-import com.thesis.grades.model.UserDto;
 import com.thesis.grades.service.UserService;
+
 @RestController
 @RequestMapping("/grades/users")
 public class UserController {
@@ -24,37 +24,32 @@ public class UserController {
 	private UserService userService;
 	
 	@GetMapping
-	public List<UserDto> findAll() {
+	public List<User> findAll() {
 		return userService.findAll();
 	}
 	
 	@PostMapping
-    public UserDto create(@RequestBody UserDto user) {
+    public User create(@RequestBody User user) {
         return userService.addUser(user);
     }
 	
 	@GetMapping("/{id}")
-	public UserDto findUserById(@PathVariable Long id) {
+	public User findUserById(@PathVariable Long id) {
 		return this.userService.findUserById(id);
 	}
 	
-	@GetMapping("/{id}/role")
-	public RoleDto getUserRole(@PathVariable Long id) {
-		return this.userService.getUserRole(id);
-	}
-	
 	@PostMapping("/{id}/role")
-	public UserDto addRoleToUser(@PathVariable Long id, @RequestBody AddRoleToUserRequest request) {
-		return this.userService.addRoleToUser(id, request.getRoleId());
+	public User addRoleToUser(@PathVariable Long id, @RequestBody AddRoleToUserRequest request) {
+		return this.userService.addRoleToUser(id, request.getRole());
 	}
 	
 	@PutMapping
-	public UserDto update(@RequestBody UserDto user) {
-		return userService.update(user);
+	public User update(@RequestBody User user) {
+		return userService.saveOrUpdate(user);
 	}
 	
 	@DeleteMapping("/{id}")
-	public UserDto deleteById(@PathVariable Long id) {
+	public User deleteById(@PathVariable Long id) {
 		return userService.deleteById(id);
 	}
 }

@@ -1,6 +1,6 @@
 package com.thesis.grades.model;
 
-import com.thesis.grades.entity.Class;
+import com.thesis.grades.entity.SchoolClass;
 
 public class StudentDto  {
 

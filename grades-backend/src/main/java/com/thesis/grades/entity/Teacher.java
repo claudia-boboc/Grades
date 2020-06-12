@@ -28,10 +28,10 @@ public class Teacher extends Person {
 			  name = "profesor_clasa", 
 			  joinColumns = @JoinColumn(name = "profesor_id"), 
 			  inverseJoinColumns = @JoinColumn(name = "clasa_id"))
-	private List<Class> classrooms = new ArrayList<Class>();
+	private List<SchoolClass> classrooms = new ArrayList<SchoolClass>();
 	
 	public Teacher(Integer id, String surname, String firstName, String sex, Date dateOfBirth, Course course,
-			List<Class> classrooms) {
+			List<SchoolClass> classrooms) {
 		super(id, surname, firstName, sex, dateOfBirth);
 		this.course = course;
 		this.classrooms = classrooms;
@@ -49,10 +49,10 @@ public class Teacher extends Person {
 	public void setCourse(Course course) {
 		this.course = course;
 	}
-	public List<Class> getClassrooms() {
+	public List<SchoolClass> getClassrooms() {
 		return classrooms;
 	}
-	public void setClassrooms(List<Class> classrooms) {
+	public void setClassrooms(List<SchoolClass> classrooms) {
 		this.classrooms = classrooms;
 	}
 	@Override

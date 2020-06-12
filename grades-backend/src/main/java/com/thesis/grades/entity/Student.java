@@ -14,9 +14,9 @@ public class Student extends Person {
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	 @JoinColumn(name="clasa_id", nullable=false)
-	private Class classroom;
+	private SchoolClass classroom;
 	
-	public Student(Integer id, String surname, String firstName, String sex, Date dateOfBirth, Class classroom) {
+	public Student(Integer id, String surname, String firstName, String sex, Date dateOfBirth, SchoolClass classroom) {
 		super(id, surname, firstName, sex, dateOfBirth);
 		this.classroom = classroom;
 	}
@@ -25,11 +25,11 @@ public class Student extends Person {
 		super();
 	}
 
-	public Class getClassroom() {
+	public SchoolClass getClassroom() {
 		return classroom;
 	}
 
-	public void setClassroom(Class classroom) {
+	public void setClassroom(SchoolClass classroom) {
 		this.classroom = classroom;
 	}
 

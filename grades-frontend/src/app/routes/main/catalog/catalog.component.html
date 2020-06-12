@@ -1,13 +1,29 @@
 <table mat-table [dataSource]="dataSource" class="table">
     <ng-container matColumnDef="object">
-        <th mat-header-cell *matHeaderCellDef width="40%"> Object </th>
+        <th mat-header-cell *matHeaderCellDef width="40%"> Class </th>
         <td mat-cell *matCellDef="let element"> {{element.object}} </td>
     </ng-container>
 
     <ng-container matColumnDef="grades">
         <th mat-header-cell *matHeaderCellDef width="50%"> Grades </th>
-        <td mat-cell *matCellDef="let element"> {{element.grades}} </td>
+        <td mat-cell *matCellDef="let element of grades">
+            <mat-chip-list aria-label="grades">
+                <span *ngFor="let grade of grades; let i=index">
+
+                    <mat-chip *ngIf="element.grades[i]" color="primary" selected
+                        matTooltip="{{element.date | date:'fullDate'}}" matTooltipPosition="above">
+                        {{element.grades[i]}}
+
+                    </mat-chip>
+                </span>
+
+
+            </mat-chip-list>
+
+        </td>
     </ng-container>
+
+
 
     <ng-container matColumnDef="mean">
         <th mat-header-cell *matHeaderCellDef> Mean </th>
