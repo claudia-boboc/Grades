@@ -20,7 +20,10 @@
    // max-height: 500px;
    // min-width: 300px;
  }
- 
+ .mat-accordion {
+     width: 75%
+ }
+
  .example-headers-align .mat-expansion-panel-header-description {
    justify-content: flex-end;
 //    align-items: center;
@@ -62,6 +65,10 @@
     font-size: 14px;
 }
 
+.account_circle {
+    font-size: 19px;
+    position: absolute;
+}
 .mat-row {
     min-height: 28px;
 }

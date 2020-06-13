@@ -3,7 +3,10 @@ import { MatDialog, MatDialogRef, MatDialogConfig, MAT_DIALOG_DATA, MatTable } f
 import { AddGradeComponent } from '../add-grade/add-grade.component';
 
 
-
+export interface Classroom {
+  id: number;
+  name: String;
+}
 export interface Element {
   number: number;
   grade: number;
@@ -11,6 +14,7 @@ export interface Element {
 }
 
 export interface Student {
+  classroomName: string;
   id: string;
   name: string;
   grades: Element[];
@@ -18,6 +22,7 @@ export interface Student {
 
 const ELEMENT_DATA: Student[] = [
   {
+    classroomName: 'Clasa a XI-a C',
     id: '1',
     name: 'Ionescu Anca',
     grades: [
@@ -27,6 +32,7 @@ const ELEMENT_DATA: Student[] = [
     ]
   },
   {
+    classroomName: 'Clasa a XI-a C',
     id: '2',
     name: 'Andriescu Ioana',
     grades: [
@@ -35,6 +41,7 @@ const ELEMENT_DATA: Student[] = [
     ]
   },
   {
+    classroomName: 'Clasa a XI-a C',
     id: '3',
     name: 'Boaca Ionut',
     grades: [
@@ -43,6 +50,7 @@ const ELEMENT_DATA: Student[] = [
     ]
   },
   {
+    classroomName: 'Clasa a XII-a A',
     id: '4',
     name: 'Teodoreanu Ionel',
     grades: [
@@ -51,6 +59,7 @@ const ELEMENT_DATA: Student[] = [
     ]
   },
   {
+    classroomName: 'Clasa a XII-a A',
     id: '5',
     name: 'Popescu Mihaela',
     grades: [
@@ -59,11 +68,21 @@ const ELEMENT_DATA: Student[] = [
     ]
   },
   {
+    classroomName: 'Clasa a XII-a A',
     id: '6',
     name: 'Moraru Ana',
     grades: [
       { number: 1, grade: 2, date: new Date("2018-03-16") },
       { number: 2, grade: 5, date: new Date("2018-03-21") }
+    ]
+  },
+  {
+    classroomName: 'Clasa a XII-a A',
+    id: '6',
+    name: 'Grigore Madalina',
+    grades: [
+      { number: 1, grade: 9, date: new Date("2018-03-16") },
+      { number: 2, grade: 7, date: new Date("2018-03-21") }
     ]
   }
 ];
@@ -78,8 +97,24 @@ export class TeacherCatalogComponent {
   grade: number;
   date: Date;
 
-  constructor(public dialog: MatDialog) { }
+  public FilterClass: Object = [];
+  public ClassroomName = [{ name: 'Clasa a IX-a B' }, { name: 'Clasa a X-a D' }, { name: 'Clasa a XI-a C' }, { name: 'Clasa a XII-a A' }];
 
+  constructor(public dialog: MatDialog) {
+    this.getClassroom();
+  }
+
+  getClassroom() {
+    console.log("getClassroom");
+    return this.ClassroomName;
+  }
+
+  SearchClassroom(name: string) {
+    let classr = this.students.filter(c => c.classroomName == name);
+    this.FilterClass = classr;
+    return this.FilterClass;
+
+  }
   displayedColumns = ['position', 'name', 'date', 'actions'];
   students = ELEMENT_DATA;
 

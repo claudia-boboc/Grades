@@ -2,21 +2,20 @@ import { Component, OnInit } from '@angular/core';
 
 export interface Catalog {
   object: string;
-  grades: number[];
+  grades: Grade[];
   mean: number;
-  date: Date;
+
 }
 
-// export interface Grade {
-//   gradeValue:number,
-//   date: Date
-// }
+export interface Grade {
+  gradeValue: number,
+  date: Date
+}
 
 const CATALOG_DATA: Catalog[] = [
-  { object: 'Matematica', grades: [8], mean: 8, date: new Date("2018-03-03") },
-  { object: 'Limba si literatura romana', grades: [8, 10], mean: 9, date: new Date("2018-03-20") },
-  { object: 'Limba engleză', grades: [6, 10], mean: 8, date: new Date("2018-03-21") },
-  { object: 'Limba franceză', grades: [5, 9, 10], mean: 7, date: new Date("2018-03-01") }
+  { object: 'Matematica', grades: [{ gradeValue: 8, date: new Date("2018-03-03") }, { gradeValue: 7, date: new Date("2018-05-03") }], mean: 8 },
+  { object: 'Limba si literatura romana', grades: [{ gradeValue: 6, date: new Date("2018-03-03") }, { gradeValue: 7, date: new Date("2018-05-03") }, { gradeValue: 9, date: new Date("2018-05-03") }], mean: 9 }
+
 ]
 @Component({
   selector: 'app-catalog',
@@ -27,12 +26,6 @@ export class CatalogComponent implements OnInit {
   displayedColumns: string[] = ['object', 'grades', 'mean'];
   dataSource = CATALOG_DATA;
 
-  grades: Catalog[] = [
-    { object: 'Matematica', grades: [8], mean: 8, date: new Date("2018-03-16") },
-    { object: 'Limba si literatura romana', grades: [8, 10], mean: 9, date: new Date("2018-03-16") },
-    { object: 'Limba engleză', grades: [6, 10], mean: 8, date: new Date("2018-03-16") },
-    { object: 'Limba franceză', grades: [5, 9], mean: 7, date: new Date("2018-03-16") }
-  ]
   constructor() { }
 
   ngOnInit() {

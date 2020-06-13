@@ -6,13 +6,13 @@
 
     <ng-container matColumnDef="grades">
         <th mat-header-cell *matHeaderCellDef width="50%"> Grades </th>
-        <td mat-cell *matCellDef="let element of grades">
+        <td mat-cell *matCellDef="let element of CATALOG_DATA">
             <mat-chip-list aria-label="grades">
-                <span *ngFor="let grade of grades; let i=index">
+                <span *ngFor="let grade of element.grades; let i=index">
 
                     <mat-chip *ngIf="element.grades[i]" color="primary" selected
-                        matTooltip="{{element.date | date:'fullDate'}}" matTooltipPosition="above">
-                        {{element.grades[i]}}
+                        matTooltip="{{element.grades[i].date | date:'fullDate'}}" matTooltipPosition="above">
+                        {{element.grades[i].gradeValue}}
 
                     </mat-chip>
                 </span>
