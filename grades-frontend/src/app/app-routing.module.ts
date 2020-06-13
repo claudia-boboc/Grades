@@ -5,14 +5,15 @@ import { UsersBoardComponent } from './routes/main/config/user/users-board/users
 import { LoginComponent } from './routes/main/login/login.component';
 import { CatalogComponent } from './routes/main/catalog/catalog.component';
 import { TeacherCatalogComponent } from './routes/main/teacher-catalog/teacher-catalog.component';
+import { AuthGaurdService } from './auth-guard.service';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'config', component: UsersBoardComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'catalog', component: CatalogComponent },
-  { path: 'teachercatalog', component: TeacherCatalogComponent }
+  { path: '', component: HomeComponent, canActivate:[AuthGaurdService]},
+  { path: 'home', component: HomeComponent, canActivate:[AuthGaurdService]},
+  { path: 'config', component: UsersBoardComponent, canActivate:[AuthGaurdService] },
+  { path: 'login', component: LoginComponent},
+  { path: 'catalog', component: CatalogComponent, canActivate:[AuthGaurdService] },
+  { path: 'teachercatalog', component: TeacherCatalogComponent, canActivate:[AuthGaurdService] }
 ];
 
 @NgModule({

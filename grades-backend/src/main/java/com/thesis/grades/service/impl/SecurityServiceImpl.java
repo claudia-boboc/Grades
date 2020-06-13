@@ -24,7 +24,7 @@ public class SecurityServiceImpl implements SecurityService {
 
 	@Override
 	public User getCurrentUser() {
-		Object userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
+		Object userDetails = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if (userDetails instanceof UserDetails) {
             return this.userRepository.findByUsername(((UserDetails)userDetails).getUsername());
         }

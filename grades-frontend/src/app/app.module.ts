@@ -31,6 +31,8 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { CdkTableModule } from '@angular/cdk/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { AuthService } from './routes/main/login/auth.service';
+import { AuthGaurdService } from './auth-guard.service';
 
 
 @NgModule({
@@ -76,7 +78,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTooltipModule
   ],
 
-  providers: [UserService],
+  providers: [UserService, AuthService, AuthGaurdService],
   bootstrap: [AppComponent],
   entryComponents: [
     AddGradeComponent

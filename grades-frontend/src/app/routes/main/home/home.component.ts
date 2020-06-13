@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { AuthService } from '../login/auth.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,5 +8,16 @@ import { map, shareReplay } from 'rxjs/operators';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute) { }
+
+  logout() {
+    this.authService.logout();
+    console.log(this.authService.isAuthenticated());
+    this.router.navigate(['/login'], { relativeTo: this.route });
+  }
 
 }
