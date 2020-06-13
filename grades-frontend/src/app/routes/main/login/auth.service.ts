@@ -10,47 +10,31 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(username, password) {
-    // return this.http.post(this.url + "/login", { username, password }).pipe(tap(
-    //   (result) => {
-    //     if (!!result) {
-    //       this.authenticated = true;
-    //     }
-    //   },
-    //   (error) => {
-    //     this.authenticated = false;
-    //     console.error(error);
-    //   }
-    // ));
-    if (username === "admin" && password === "admin") {
-      console.log(username, password)
-        sessionStorage.setItem('username', username)
-        return true;
-      } else {
-        return false;
+    return this.http.post(this.url + "/login", { username, password }).pipe(tap(
+      (result: any) => {
+        if (!!result && !!result.username) {
+          sessionStorage.setItem('username', username);
+          this.authenticated = true;
+        }
+      },
+      (error) => {
+        this.authenticated = false;
+        sessionStorage.removeItem('username');
+        console.error(error);
       }
+    ));
   }
 
   logout() {
-    // this.http
-    //   .post(this.url + "/logout", {})
-    //   .subscribe(() => (this.authenticated = false));
-    sessionStorage.removeItem('username')
-    
+    return this.http
+      .post(this.url + "/logout", {})
+      .pipe(tap((() => {
+        this.authenticated = false;
+        sessionStorage.removeItem('username')
+      })));    
   }
 
   isAuthenticated() {
-    // return this.http.get(this.url + "/getCurrentUser").pipe(
-    //   tap(
-    //     (result: any) => {
-    //       if (!!result && !!result.username) {
-    //         this.authenticated = true;
-    //       } else {
-    //         this.authenticated = false;
-    //       }
-    //     },
-    //     (error: any) => (this.authenticated = false)
-    //   )
-    // );
     let user = sessionStorage.getItem('username')
     return !!user;
   }

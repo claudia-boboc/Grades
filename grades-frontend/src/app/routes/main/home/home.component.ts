@@ -15,9 +15,10 @@ export class HomeComponent {
     private route: ActivatedRoute) { }
 
   logout() {
-    this.authService.logout();
-    console.log(this.authService.isAuthenticated());
-    this.router.navigate(['/login'], { relativeTo: this.route });
+    this.authService.logout().subscribe(() => {
+      console.log(this.authService.isAuthenticated());
+      this.router.navigate(['/login'], { relativeTo: this.route });
+    });
   }
 
 }

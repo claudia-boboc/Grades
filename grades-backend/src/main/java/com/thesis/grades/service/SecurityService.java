@@ -5,5 +5,7 @@ import com.thesis.grades.entity.User;
 public interface SecurityService {
 	User getCurrentUser();
 
-    boolean login(String username, String password);
+    User login(String username, String password);
+
+    boolean logout();
 }

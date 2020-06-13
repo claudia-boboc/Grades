@@ -1,6 +1,7 @@
 package com.thesis.grades.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,8 +30,13 @@ public class LoginController {
     }
 
 	@PostMapping("/login")
-	public boolean login(@RequestBody User user) {
+	public User login(@RequestBody User user) {
 		return securityService.login(user.getUsername(), user.getPassword());
+	}
+
+	@GetMapping("/logout")
+	public boolean logout() {
+		return this.securityService.logout();
 	}
 	
 	@GetMapping("/getCurrentUser")

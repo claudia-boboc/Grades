@@ -30,10 +30,10 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     const credentials = this.loginForm.value;
-    if(this.authService.login(credentials.username, credentials.password)) {
+    this.authService.login(credentials.username, credentials.password).subscribe(user => {
+      console.log(user);
       this.router.navigate([''], { relativeTo: this.route });
-    }
-    
+    });
   }
 
 }

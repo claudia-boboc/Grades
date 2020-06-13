@@ -18,7 +18,7 @@ import { MatIconModule, MatIcon } from '@angular/material/icon';
 import { UserFormComponent } from './routes/main/config/user/users-board/user-form/user-form.component'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RoleFormComponent } from './routes/main/config/user/users-board/role-form/role-form.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserService } from './routes/main/config/user/users.service';
 import { LoginComponent } from './routes/main/login/login.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -33,8 +33,6 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AuthService } from './routes/main/login/auth.service';
 import { AuthGaurdService } from './auth-guard.service';
-import { CatalogService } from './routes/main/catalog/catalog.service';
-import { TeacherCatalogService } from './routes/main/teacher-catalog/teacher-catalog.service';
 
 
 @NgModule({
@@ -80,7 +78,7 @@ import { TeacherCatalogService } from './routes/main/teacher-catalog/teacher-cat
     MatTooltipModule
   ],
 
-  providers: [UserService, AuthService, AuthGaurdService, CatalogService, TeacherCatalogService],
+  providers: [UserService, AuthService, AuthGaurdService],
   bootstrap: [AppComponent],
   entryComponents: [
     AddGradeComponent
