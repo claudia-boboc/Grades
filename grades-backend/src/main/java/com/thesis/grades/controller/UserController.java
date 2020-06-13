@@ -3,6 +3,7 @@ package com.thesis.grades.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,7 @@ public class UserController {
 	private UserService userService;
 	
 	@GetMapping
+	@PreAuthorize("hasAuthority('TEACHER')")
 	public List<User> findAll() {
 		return userService.findAll();
 	}
@@ -33,6 +35,7 @@ public class UserController {
         return userService.addUser(user);
     }
 	
+	@PreAuthorize("hasAuthority('TEACHER')")
 	@GetMapping("/{id}")
 	public User findUserById(@PathVariable Long id) {
 		return this.userService.findUserById(id);
