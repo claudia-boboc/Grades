@@ -33,6 +33,8 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AuthService } from './routes/main/login/auth.service';
 import { AuthGaurdService } from './auth-guard.service';
+import { CatalogService } from './routes/main/catalog/catalog.service';
+import { TeacherCatalogService } from './routes/main/teacher-catalog/teacher-catalog.service';
 
 
 @NgModule({
@@ -78,7 +80,7 @@ import { AuthGaurdService } from './auth-guard.service';
     MatTooltipModule
   ],
 
-  providers: [UserService, AuthService, AuthGaurdService],
+  providers: [UserService, AuthService, AuthGaurdService, CatalogService, TeacherCatalogService],
   bootstrap: [AppComponent],
   entryComponents: [
     AddGradeComponent

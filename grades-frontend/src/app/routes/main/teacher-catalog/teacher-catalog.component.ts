@@ -1,91 +1,8 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MatDialogConfig, MAT_DIALOG_DATA, MatTable } from "@angular/material";
 import { AddGradeComponent } from '../add-grade/add-grade.component';
-
-
-export interface Classroom {
-  id: number;
-  name: String;
-}
-export interface Element {
-  number: number;
-  grade: number;
-  date: Date;
-}
-
-export interface Student {
-  classroomName: string;
-  id: string;
-  name: string;
-  grades: Element[];
-}
-
-const ELEMENT_DATA: Student[] = [
-  {
-    classroomName: 'Clasa a XI-a C',
-    id: '1',
-    name: 'Ionescu Anca',
-    grades: [
-      { number: 1, grade: 10, date: new Date("2018-03-16") },
-      { number: 2, grade: 8, date: new Date("2018-03-21") },
-      { number: 2, grade: 8, date: new Date("2018-03-21") }
-    ]
-  },
-  {
-    classroomName: 'Clasa a XI-a C',
-    id: '2',
-    name: 'Andriescu Ioana',
-    grades: [
-      { number: 1, grade: 2, date: new Date("2018-03-16") },
-      { number: 2, grade: 5, date: new Date("2018-03-16") }
-    ]
-  },
-  {
-    classroomName: 'Clasa a XI-a C',
-    id: '3',
-    name: 'Boaca Ionut',
-    grades: [
-      { number: 1, grade: 10, date: new Date("2018-03-16") },
-      { number: 2, grade: 8, date: new Date("2018-03-21") }
-    ]
-  },
-  {
-    classroomName: 'Clasa a XII-a A',
-    id: '4',
-    name: 'Teodoreanu Ionel',
-    grades: [
-      { number: 1, grade: 2, date: new Date("2018-03-16") },
-      { number: 2, grade: 5, date: new Date("2018-03-21") }
-    ]
-  },
-  {
-    classroomName: 'Clasa a XII-a A',
-    id: '5',
-    name: 'Popescu Mihaela',
-    grades: [
-      { number: 1, grade: 10, date: new Date("2018-03-16") },
-      { number: 2, grade: 8, date: new Date("2018-03-21") }
-    ]
-  },
-  {
-    classroomName: 'Clasa a XII-a A',
-    id: '6',
-    name: 'Moraru Ana',
-    grades: [
-      { number: 1, grade: 2, date: new Date("2018-03-16") },
-      { number: 2, grade: 5, date: new Date("2018-03-21") }
-    ]
-  },
-  {
-    classroomName: 'Clasa a XII-a A',
-    id: '6',
-    name: 'Grigore Madalina',
-    grades: [
-      { number: 1, grade: 9, date: new Date("2018-03-16") },
-      { number: 2, grade: 7, date: new Date("2018-03-21") }
-    ]
-  }
-];
+import { Student } from 'src/app/app.model';
+import { TeacherCatalogService } from './teacher-catalog.service';
 
 @Component({
   selector: 'app-teacher-catalog',
@@ -93,15 +10,22 @@ const ELEMENT_DATA: Student[] = [
   styleUrls: ['./teacher-catalog.component.scss']
 })
 
-export class TeacherCatalogComponent {
-  grade: number;
-  date: Date;
+export class TeacherCatalogComponent implements OnInit {
+  // grade: number;
+  // date: Date;
+
+  displayedColumns = ['position', 'name', 'date', 'actions'];
+  students = [];
 
   public FilterClass: Object = [];
   public ClassroomName = [{ name: 'Clasa a IX-a B' }, { name: 'Clasa a X-a D' }, { name: 'Clasa a XI-a C' }, { name: 'Clasa a XII-a A' }];
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog, private teacherCatalogService: TeacherCatalogService) {
     this.getClassroom();
+  }
+
+  ngOnInit() {
+    this.students = this.teacherCatalogService.getCatalogByClassId();
   }
 
   getClassroom() {
@@ -115,8 +39,7 @@ export class TeacherCatalogComponent {
     return this.FilterClass;
 
   }
-  displayedColumns = ['position', 'name', 'date', 'actions'];
-  students = ELEMENT_DATA;
+
 
   @ViewChild(MatTable) table: MatTable<any>;
   openDialog(action, grade, studentId) {
@@ -153,8 +76,8 @@ export class TeacherCatalogComponent {
 
     var d = new Date();
     student.grades = student.grades.concat([{
-      number: d.getTime(),
-      grade: catalogEntry.grade,
+      id: d.getTime(),
+      gradeValue: catalogEntry.gradeValue,
       date: catalogEntry.date
     }]);
     this.table.renderRows();
@@ -168,14 +91,14 @@ export class TeacherCatalogComponent {
       return;
     }
 
-    const catalogEntry = student.grades.find(entry => entry.number === updatedCatalogEntry.number);
+    const catalogEntry = student.grades.find(entry => entry.id === updatedCatalogEntry.id);
 
     if (!catalogEntry) {
       return;
     }
 
     catalogEntry.date = updatedCatalogEntry.date;
-    catalogEntry.grade = updatedCatalogEntry.grade;
+    catalogEntry.gradeValue = updatedCatalogEntry.gradeValue;
     this.table.renderRows();
   }
 
@@ -186,7 +109,7 @@ export class TeacherCatalogComponent {
       return;
     }
 
-    student.grades = student.grades.filter(catalogEntry => catalogEntry.number !== deletedCatalogEntry.number);
+    student.grades = student.grades.filter(catalogEntry => catalogEntry.id !== deletedCatalogEntry.id);
     this.table.renderRows();
   }
 

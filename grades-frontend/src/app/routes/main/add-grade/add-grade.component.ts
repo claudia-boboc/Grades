@@ -1,13 +1,10 @@
 import { Component, Inject, Optional, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Grade } from 'src/app/app.model';
 
 
-export interface Element {
-  number: number;
-  grade: number;
-  date: Date;
-}
+
 
 @Component({
   selector: 'app-add-grade',
@@ -16,7 +13,7 @@ export interface Element {
 })
 export class AddGradeComponent implements OnInit {
   action: string;
-  grade: Element;
+  grade: Grade;
 
   form: FormGroup;
 
@@ -30,14 +27,14 @@ export class AddGradeComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      grade: [this.grade.grade, [Validators.required, Validators.min(1), Validators.max(10)]],
+      gradeValue: [this.grade.gradeValue, [Validators.required, Validators.min(1), Validators.max(10)]],
       date: [this.grade.date, [Validators.required]]
     })
   }
 
   doAction() {
     if (this.form.valid) {
-      this.dialogRef.close({ event: this.action, data: { ...this.form.value, number: this.grade.number } });
+      this.dialogRef.close({ event: this.action, data: { ...this.form.value, id: this.grade.id } });
     }
 
   }

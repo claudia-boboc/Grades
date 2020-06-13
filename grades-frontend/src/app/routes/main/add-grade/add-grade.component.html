@@ -10,7 +10,7 @@
         <div mat-dialog-content>
             <mat-form-field *ngIf="action != 'Delete'; else elseTemplate">
                 <input autocomplete="off" type="number" min="1" max="10" matInput placeholder="Grade"
-                    formControlName="grade">
+                    formControlName="gradeValue">
 
             </mat-form-field>
             <mat-form-field class="date" *ngIf="action != 'Delete'; else ">
@@ -23,7 +23,7 @@
     </form>
 
     <ng-template #elseTemplate>
-        Sure to delete <b>{{grade.grade}}</b>?
+        Sure to delete <b>{{grade.gradeValue}}</b>?
     </ng-template>
     <div mat-dialog-action class="buttons">
         <button mat-button (click)="doAction()">{{action}}</button>

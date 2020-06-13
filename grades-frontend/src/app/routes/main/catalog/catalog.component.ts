@@ -1,22 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CatalogService } from './catalog.service';
 
-export interface Catalog {
-  object: string;
-  grades: Grade[];
-  mean: number;
-
-}
-
-export interface Grade {
-  gradeValue: number,
-  date: Date
-}
-
-const CATALOG_DATA: Catalog[] = [
-  { object: 'Matematica', grades: [{ gradeValue: 8, date: new Date("2018-03-03") }, { gradeValue: 7, date: new Date("2018-05-03") }], mean: 8 },
-  { object: 'Limba si literatura romana', grades: [{ gradeValue: 6, date: new Date("2018-03-03") }, { gradeValue: 7, date: new Date("2018-05-03") }, { gradeValue: 9, date: new Date("2018-05-03") }], mean: 9 }
-
-]
 @Component({
   selector: 'app-catalog',
   templateUrl: './catalog.component.html',
@@ -24,11 +8,12 @@ const CATALOG_DATA: Catalog[] = [
 })
 export class CatalogComponent implements OnInit {
   displayedColumns: string[] = ['object', 'grades', 'mean'];
-  dataSource = CATALOG_DATA;
+  dataSource = [];
 
-  constructor() { }
+  constructor(private catalogService: CatalogService) { }
 
   ngOnInit() {
+    this.dataSource = this.catalogService.getCatalogByStudentId(null);
   }
 
 

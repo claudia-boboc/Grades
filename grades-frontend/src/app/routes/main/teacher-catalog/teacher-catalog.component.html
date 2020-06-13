@@ -25,12 +25,12 @@
                 <mat-table #table [dataSource]="student.grades" #mytable>
                     <ng-container matColumnDef="position">
                         <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-                        <mat-cell *matCellDef="let element"> {{element.number}} </mat-cell>
+                        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="name">
                         <mat-header-cell *matHeaderCellDef> Grade </mat-header-cell>
-                        <mat-cell *matCellDef="let element"> {{element.grade}} </mat-cell>
+                        <mat-cell *matCellDef="let element"> {{element.gradeValue}} </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="date">
