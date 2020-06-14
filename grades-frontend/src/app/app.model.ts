@@ -22,3 +22,9 @@ export interface Student {
     name: string;
     grades: Grade[];
 }
+
+export interface User {
+    id: number,
+    username: string,
+    roles: string[]
+}

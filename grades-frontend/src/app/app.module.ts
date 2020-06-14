@@ -33,7 +33,11 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AuthService } from './routes/main/login/auth.service';
 import { AuthGaurdService } from './auth-guard.service';
-
+import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { NavigationMenuComponent } from './navigation-bar/navigation-menu/navigation-menu.component';
+import { NavigationMenuService } from './navigation-bar/navigation-menu/navigation-menu.service';
+import { AuthenticationInterceptor } from './authentication.interceptor';
 
 @NgModule({
   declarations: [
@@ -45,7 +49,9 @@ import { AuthGaurdService } from './auth-guard.service';
     LoginComponent,
     CatalogComponent,
     TeacherCatalogComponent,
-    AddGradeComponent
+    AddGradeComponent,
+    NavigationBarComponent,
+    NavigationMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -75,10 +81,15 @@ import { AuthGaurdService } from './auth-guard.service';
     MatNativeDateModule,
     AngularFireDatabaseModule,
     CdkTableModule,
-    MatTooltipModule
+    MatTooltipModule,
+    FlexLayoutModule
   ],
 
-  providers: [UserService, AuthService, AuthGaurdService],
+  providers: [UserService, AuthService, AuthGaurdService, NavigationMenuService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthenticationInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent],
   entryComponents: [
     AddGradeComponent

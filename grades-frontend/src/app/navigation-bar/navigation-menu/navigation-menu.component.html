@@ -1,0 +1,32 @@
+<app-navigation-bar *ngIf="isAuthenticated()" (toggleSidenav)="sidenav.toggle()"></app-navigation-bar>
+<mat-sidenav-container class="nav-container">
+
+    <mat-sidenav #sidenav mode="over">
+
+        <mat-toolbar>
+            <mat-toolbar-row>
+                <h2> Grades Menu </h2>
+            </mat-toolbar-row>
+        </mat-toolbar>
+
+        <mat-nav-list>
+
+            <a *ngFor="let item of menuEntries | async" mat-list-item (click)="sidenav.close()"
+                [routerLink]="[item.route]" routerLinkActive="list-item-active">
+                <mat-icon matListIcon> {{ item.icon }} </mat-icon>
+                {{item.title}}
+            </a>
+
+            <mat-divider></mat-divider>
+
+            ...
+
+        </mat-nav-list>
+
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+
+</mat-sidenav-container>

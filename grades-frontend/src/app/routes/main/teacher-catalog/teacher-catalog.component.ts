@@ -20,6 +20,8 @@ export class TeacherCatalogComponent implements OnInit {
   public FilterClass: Object = [];
   public ClassroomName = [{ name: 'Clasa a IX-a B' }, { name: 'Clasa a X-a D' }, { name: 'Clasa a XI-a C' }, { name: 'Clasa a XII-a A' }];
 
+  @ViewChild(MatTable) table: MatTable<any>;
+
   constructor(public dialog: MatDialog, private teacherCatalogService: TeacherCatalogService) {
     this.getClassroom();
   }
@@ -40,8 +42,6 @@ export class TeacherCatalogComponent implements OnInit {
 
   }
 
-
-  @ViewChild(MatTable) table: MatTable<any>;
   openDialog(action, grade, studentId) {
     const dialogRef = this.dialog.open(AddGradeComponent, {
       width: '300px',

@@ -1,0 +1,28 @@
+<mat-toolbar color="primary">
+
+    <mat-toolbar-row>
+        <div fxFlex fxLayout="row" fxLayoutAlign="start">
+            <button mat-icon-button (click)="toggleSidenav.emit()">
+                <mat-icon>menu</mat-icon>
+            </button>
+
+            <span>Grades App</span>
+        </div>
+
+        <div fxFlex fxLayout="row" fxLayoutAlign="end center">
+
+            <button mat-icon-button [matMenuTriggerFor]="auth">
+                <mat-icon>person_outline</mat-icon>
+            </button>
+            <mat-menu #auth="matMenu">
+                <button mat-menu-item (click)="logout()">
+                    <mat-icon>exit_to_app</mat-icon>
+                    <span>Sign out</span>
+                </button>
+            </mat-menu>
+
+        </div>
+
+    </mat-toolbar-row>
+
+</mat-toolbar>

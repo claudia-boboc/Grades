@@ -7,7 +7,7 @@ export class AuthService {
   authenticated = false;
   private url = "http://localhost:8080";
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   login(username, password) {
     return this.http.post(this.url + "/login", { username, password }).pipe(tap(
@@ -31,11 +31,15 @@ export class AuthService {
       .pipe(tap((() => {
         this.authenticated = false;
         sessionStorage.removeItem('username')
-      })));    
+      })));
   }
 
   isAuthenticated() {
     let user = sessionStorage.getItem('username')
     return !!user;
+  }
+
+  getCurrentUser() {
+    return this.http.get(this.url + '/getCurrentUser');
   }
 }
