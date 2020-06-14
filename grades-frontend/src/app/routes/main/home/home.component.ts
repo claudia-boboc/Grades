@@ -9,16 +9,5 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class HomeComponent {
 
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private route: ActivatedRoute) { }
-
-  logout() {
-    this.authService.logout().subscribe(() => {
-      console.log(this.authService.isAuthenticated());
-      this.router.navigate(['/login'], { relativeTo: this.route });
-    });
-  }
 
 }

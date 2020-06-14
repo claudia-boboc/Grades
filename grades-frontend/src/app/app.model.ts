@@ -23,8 +23,14 @@ export interface Student {
     grades: Grade[];
 }
 
+export interface Roles {
+    student?: boolean;
+    teacher?: boolean;
+    admin?: boolean;
+}
+
 export interface User {
-    id: number,
-    username: string,
-    roles: string[]
+    uid: string;
+    email: string;
+    roles: Roles;
 }

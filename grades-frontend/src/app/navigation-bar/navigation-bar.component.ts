@@ -18,9 +18,6 @@ export class NavigationBarComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout().subscribe(() => {
-      console.log(this.authService.isAuthenticated());
-      this.router.navigate(['/login'], { relativeTo: this.route });
-    });
+    this.authService.logout();
   }
 }

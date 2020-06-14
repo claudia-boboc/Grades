@@ -13,16 +13,16 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-              private authService: AuthService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
 
 
 
     this.loginForm = this.formBuilder.group({
-      username: ['', [Validators.required]],
+      email: ['', [Validators.required]],
       password: ['', [Validators.required]]
     })
   }
@@ -30,10 +30,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     const credentials = this.loginForm.value;
-    this.authService.login(credentials.username, credentials.password).subscribe(user => {
-      console.log(user);
-      this.router.navigate([''], { relativeTo: this.route });
-    });
+    this.authService.login(credentials.email, credentials.password);
   }
 
 }
