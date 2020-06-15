@@ -1,21 +1,81 @@
-<button mat-raised-button color="primary" (click)="onShowRoleForm()">Add roles</button>
-<button mat-raised-button color="primary" (click)="onShowUserForm()">Add user</button>
-<div *ngIf="showForm$ | async as form">
-    <ng-container [ngSwitch]="form">
-        <ng-container *ngSwitchCase="'USER_FORM'">
-            <app-user-form [roles]="roles$ | async" (closed)="onCancel()" (saved)="onSaveUser($event)"></app-user-form>
+<div class="main">
+    <mat-tab-group mat-align-tabs="center">
+        <mat-tab label="Add User">
+            <mat-card class="form-card">
+                <form (ngSubmit)="addUser()" [formGroup]="userForm">
+                    <mat-form-field class="full-width">
+                        <input matInput type="email" placeholder="Email" formControlName="email">
+                    </mat-form-field>
+                    <br>
 
-        </ng-container>
-        <ng-container *ngSwitchCase="'ROLE_FORM'">
-            <app-role-form (closed)="onCancel()" (saved)="onSaveRole($event)"></app-role-form>
-        </ng-container>
+                    <mat-form-field>
+                        <mat-label>Role</mat-label>
+                        <mat-select formControlName="role" required #role>
 
-        <mat-list >
-            <mat-list-item *ngFor="let role of roles$ | async">{{role.name}}</mat-list-item>
-          </mat-list>
-    </ng-container>
+                            <mat-option *ngFor="let role of roles" [value]="role.key" #id>
+                                {{role.value}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <button mat-button type="submit">Save</button>
+                </form>
+            </mat-card>
 
-    <mat-list >
-        <mat-list-item *ngFor="let user of users$ | async">{{user.name}}</mat-list-item>
-      </mat-list>
+        </mat-tab>
+        <!-- <mat-tab label="Add Role">
+            <mat-card class="form-card">
+                <form (ngSubmit)="onSubmit()" [formGroup]="roleForm">
+                    <mat-form-field class="full-width">
+                        <input matInput placeholder="Role Name" type="text" formControlName="name">
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="full-width">
+                        <mat-chip-list #chipList aria-label="Permissions selection">
+                            <mat-chip *ngFor="let permission of selectedPermissions.value" [selectable]="false"
+                                [removable]="true" (removed)="remove(permission)" [value]="permission">
+                                {{permission}}
+                                <mat-icon matChipRemove>cancel</mat-icon>
+                            </mat-chip>
+                            <input placeholder="New permission..." #permissionInput formControlName="permission"
+                                [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputAddOnBlur]="true">
+                        </mat-chip-list>
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                            <mat-option *ngFor="let permission of permissions" [value]="permission">
+                                {{permission}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                    <br>
+
+                    <button mat-button type="submit">Save</button>
+                    <button mat-button type="button" (click)="onCancel()">Cancel</button>
+                </form>
+            </mat-card>
+        </mat-tab> -->
+        <mat-tab label="Add Class">
+            <mat-card class="form-card">
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Classroom Name" type="text">
+                </mat-form-field>
+            </mat-card>
+        </mat-tab>
+        <mat-tab label="Add Student"> Content 2 </mat-tab>
+        <mat-tab label="Add Teacher"> Content 3 </mat-tab>
+    </mat-tab-group>
+</div>
+
+<div style="text-align:center">
+    <br> Name:
+    <input #name>
+    <br> Price:
+    <input #role>
+    <br>
+    <br> ID:
+    <input #id>
+    <br>
+
+    <br>
+    <div style="text-align:center;display:unset;">
+
+    </div>
 </div>

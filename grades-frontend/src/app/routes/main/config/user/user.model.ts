@@ -1,11 +1,12 @@
 export interface Role {
-    id: number, 
+
     name: string,
-    permissions: string[]
+    permissions: string[],
+    id: number
 }
 
-export interface User{
-    id: number,
+export interface User {
+    id?: string,
     name: string,
     role: Role
 }

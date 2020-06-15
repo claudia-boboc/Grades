@@ -2,6 +2,9 @@ import { Component, Inject, Optional, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Grade } from 'src/app/app.model';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 
 
@@ -17,12 +20,18 @@ export class AddGradeComponent implements OnInit {
 
   form: FormGroup;
 
+  _db: AngularFirestore;
+  grades: Observable<any[]>;
   constructor(public dialogRef: MatDialogRef<AddGradeComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder, public afAuth: AngularFireAuth, db: AngularFirestore) {
     console.log(data);
     this.grade = data.grade;
     this.action = data.action;
+
+    this.afAuth.auth.signInAnonymously();
+    this.grades = db.collection('tshirts').valueChanges();
+    this._db = db;
   }
 
   ngOnInit(): void {
@@ -43,4 +52,8 @@ export class AddGradeComponent implements OnInit {
     this.dialogRef.close({ event: 'Cancel' });
   }
 
+  addGrade(id: number, gradeValue: number, date: Date) {
+    let shirtsCollection = this._db.collection<Grade>('tshirts');
+    shirtsCollection.add({ id: id, gradeValue: gradeValue, date: date });
+  }
 }

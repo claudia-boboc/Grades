@@ -1,31 +1,33 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Role, User } from './user.model';
+import { AuthService } from '../../login/auth.service';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { User } from 'src/app/app.model';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-    backendUrl = 'http://localhost:8080/grades';
+  DEFAULT_PASSWORD = 'limonada';
 
-  constructor(private http: HttpClient) { }
-
-  findAllRoles(){
-      return this.http.get<Role[]>(this.backendUrl + '/roles');
-  }
-  findAllUsers(){
-    return this.http.get<User[]>(this.backendUrl + '/users');
-}
-
-  addRole(role: Role){
-      return this.http.post<Role>(this.backendUrl + '/roles', role, {});
-
+  constructor(private authService: AuthService, private db: AngularFirestore, public afAuth: AngularFireAuth) {
+    this.afAuth.auth.signInAnonymously();
   }
 
-  addUser(user: User){
-    return this.http.post<User>(this.backendUrl + '/users', user, {});
-
+  registerUser(user: User) {
+    return this.authService.registerUser(user.email, this.DEFAULT_PASSWORD)
+      .then((result) => {
+        this.addUserToCollection(user, result.user.uid);
+        console.log(result.user);
+      }).catch((error) => {
+        window.alert(error.message)
+      });
   }
 
-
+  private addUserToCollection(user: User, uid: string) {
+    this.db.collection('users').doc(uid).set(user);
+    console.log(uid);
+    console.log(user);
+  }
 }

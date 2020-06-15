@@ -17,6 +17,7 @@ export class AuthService {
     this.firebaseAuth.authState.subscribe(user => {
       if (user) {
         localStorage.setItem('user', JSON.stringify(user));
+        this.router.navigate(['/']);
       } else {
         localStorage.setItem('user', null);
       }
@@ -35,7 +36,6 @@ export class AuthService {
   login(email, password) {
     this.firebaseAuth.auth.signInWithEmailAndPassword(email, password).then(value => {
       console.log(value);
-      this.router.navigate(['/']);
     })
       .catch(err => {
         console.log('Something went wrong:', err.message);
@@ -47,10 +47,9 @@ export class AuthService {
     return (user !== null && user.email) ? true : false;
   }
 
-  // register(email: string, password: string) {
-  //   Auth.createUserWithEmailAndPassword(email, password).then(value => console.log(value))
-  // }
-
+  registerUser(email, password) {
+    return this.firebaseAuth.auth.createUserWithEmailAndPassword(email, password);
+  }
 
   logout() {
     return this.firebaseAuth.auth.signOut().then(() => {

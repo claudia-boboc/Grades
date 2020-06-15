@@ -23,14 +23,13 @@ export interface Student {
     grades: Grade[];
 }
 
-export interface Roles {
-    student?: boolean;
-    teacher?: boolean;
-    admin?: boolean;
+export enum Role {
+    STUDENT = "Student",
+    TEACHER = "Teacher",
+    ADMIN = "Admin"
 }
 
 export interface User {
-    uid: string;
     email: string;
-    roles: Roles;
+    role: string;
 }

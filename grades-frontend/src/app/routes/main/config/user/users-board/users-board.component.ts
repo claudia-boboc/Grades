@@ -1,9 +1,13 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import { Subject, BehaviorSubject, Observable } from 'rxjs';
 import { Form } from './users-board.model';
 import { tap } from 'rxjs/operators';
 import { UserService } from '../users.service';
-import { Role, User } from '../user.model';
+import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
+import { MatAutocompleteSelectedEvent } from '@angular/material';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { User, Role } from 'src/app/app.model';
 
 @Component({
   selector: 'app-users-board',
@@ -11,43 +15,40 @@ import { Role, User } from '../user.model';
   styleUrls: ['./users-board.component.scss']
 })
 export class UsersBoardComponent implements OnInit {
+  userForm: FormGroup;
 
-  Form;
-  showForm: BehaviorSubject<Form> = new BehaviorSubject(Form.NO_FORM);
-  showForm$: Observable<Form> = this.showForm.asObservable().pipe(tap(console.log));
+  _db: AngularFirestore;
+  users: Observable<any[]>;
+  roles = Object.entries(Role).map(entry => {
+    return { key: entry[0], value: entry[1] }
+  });
 
-  roles$: Observable<Role[]>;
-  users$: Observable<User[]>;
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+    private formBuilder: FormBuilder,
+    public afAuth: AngularFireAuth, db: AngularFirestore
+  ) {
+    this.users = db.collection('users').valueChanges();
+
+    this._db = db;
+  }
+
 
   ngOnInit() {
-    this.roles$ = this.userService.findAllRoles();
-    this.users$ = this.userService.findAllUsers();
+    this.userForm = this.formBuilder.group({
+      email: '',
+      role: ''
+    });
+
+    console.log(this.roles)
   }
 
-  onShowUserForm() {
-    this.showForm.next(Form.USER_FORM);
-  }
+  addUser() {
+    const userFormValue = this.userForm.value;
+    const user = {
+      email: userFormValue.email,
+      role: userFormValue.role
+    } as User;
 
-  onShowRoleForm() {
-    this.showForm.next(Form.ROLE_FORM);
+    this.userService.registerUser(user);
   }
-
-  onCancel() {
-    this.showForm.next(Form.NO_FORM);
-    console.log('cancelled');
-  }
-
-  onSaveUser(user) {
-    this.userService.addUser(user).subscribe();
-  }
-
-  onSaveRole(formValue){
-    const role = {
-      name: formValue.name,
-      permissions: formValue.selectedPermissions
-    } as Role
-    this.userService.addRole(role).subscribe();
-  }
-
 }

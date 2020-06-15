@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/app/routes/main/login/auth.service';
 import { tap, map, filter } from 'rxjs/operators';
-import { User } from 'src/app/app.model';
+import { User, Role } from 'src/app/app.model';
 
 @Injectable({
     providedIn: 'root'
@@ -43,8 +43,18 @@ export class NavigationMenuService {
         },
         {
             title: 'Config',
-            icon: 'dashboard',
+            icon: 'settings',
             route: '/config'
+        },
+        {
+            title: 'Catalog',
+            icon: 'dashboard',
+            route: '/teachercatalog'
+        },
+        {
+            title: 'View grades',
+            icon: 'dashboard',
+            route: '/catalog'
         }
     ];
 
@@ -57,11 +67,11 @@ export class NavigationMenuService {
     }
 
     private getEntries(user: User) {
-        if (user.roles.teacher) {
+        if (user.role === 'TEACHER') {
             return this.teacherMenuEntries;
-        } else if (user.roles.student) {
+        } else if (user.role === 'STUDENT') {
             return this.studentMenuEntries;
-        } else if (user.roles.admin) {
+        } else if (user.role === 'ADMIN') {
             return this.adminMenuEntries;
         }
 

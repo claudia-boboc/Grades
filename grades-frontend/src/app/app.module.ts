@@ -8,7 +8,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatSidenavModule, MatListModule, MatCard, MatCardModule, MatFormField, MatFormFieldModule, MatSelectModule, MatChipsModule, MatAutocompleteModule, MatInputModule, MatDialogModule, MatNativeDateModule } from '@angular/material';
+import { MatSidenavModule, MatListModule, MatCard, MatCardModule, MatFormField, MatFormFieldModule, MatSelectModule, MatChipsModule, MatAutocompleteModule, MatInputModule, MatDialogModule, MatNativeDateModule, MatTabsModule } from '@angular/material';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -41,6 +41,7 @@ import { AuthenticationInterceptor } from './authentication.interceptor';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
+
 var firebaseConfig = {
   apiKey: "AIzaSyBVZNzhkNknzHIczlwrMMd6bUiO1h4QvQE",
   authDomain: "grades-61599.firebaseapp.com",
@@ -65,6 +66,7 @@ var firebaseConfig = {
     AddGradeComponent,
     NavigationBarComponent,
     NavigationMenuComponent
+
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseConfig),
@@ -98,7 +100,8 @@ var firebaseConfig = {
     AngularFireDatabaseModule,
     CdkTableModule,
     MatTooltipModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatTabsModule
   ],
 
   providers: [UserService, AuthService, AuthGaurdService, NavigationMenuService, {

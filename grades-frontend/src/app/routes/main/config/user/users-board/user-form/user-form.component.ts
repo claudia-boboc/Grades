@@ -22,12 +22,12 @@ export class UserFormComponent implements OnInit {
   @Output()
   saved = new EventEmitter();
 
-  constructor( private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.userForm = this.formBuilder.group({
       name: '',
-      role: null
+      role: ''
     });
   }
 
@@ -37,7 +37,7 @@ export class UserFormComponent implements OnInit {
     this.saved.emit(value);
   }
 
-  onCancel(){
+  onCancel() {
     console.log('sada');
     this.closed.emit(Form.USER_FORM);
   }
