@@ -16,6 +16,9 @@ import { User, Role } from 'src/app/app.model';
 })
 export class UsersBoardComponent implements OnInit {
   userForm: FormGroup;
+  classForm: FormGroup;
+  studentForm: FormGroup;
+  teacherForm: FormGroup;
 
   _db: AngularFirestore;
   users: Observable<any[]>;
@@ -34,6 +37,23 @@ export class UsersBoardComponent implements OnInit {
 
 
   ngOnInit() {
+
+    this.teacherForm = this.formBuilder.group({
+      firstName: '',
+      lastName: '',
+      class: ''
+    })
+
+    this.studentForm = this.formBuilder.group({
+      firstName: '',
+      lastName: '',
+      classroom: ''
+    })
+
+    this.classForm = this.formBuilder.group({
+      class: ''
+    })
+
     this.userForm = this.formBuilder.group({
       email: '',
       role: ''
