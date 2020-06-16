@@ -12,7 +12,7 @@ export class UserService {
   DEFAULT_PASSWORD = 'limonada';
 
   constructor(private authService: AuthService, private db: AngularFirestore, public afAuth: AngularFireAuth) {
-    this.afAuth.auth.signInAnonymously();
+    //this.afAuth.auth.signInAnonymously();
   }
 
   registerUser(user: User) {

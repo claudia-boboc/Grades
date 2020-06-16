@@ -31,10 +31,7 @@ export class UsersBoardComponent implements OnInit {
     public afAuth: AngularFireAuth, db: AngularFirestore
   ) {
     this.users = db.collection('users').valueChanges();
-
-    this._db = db;
   }
-
 
   ngOnInit() {
 

@@ -23,7 +23,7 @@ export class RoleFormComponent implements OnInit {
   @Output()
   saved = new EventEmitter();
 
-  constructor( private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.roleForm = this.formBuilder.group({
@@ -39,20 +39,20 @@ export class RoleFormComponent implements OnInit {
     this.closed.emit(Form.ROLE_FORM);
   }
 
-  onCancel(){
+  onCancel() {
     console.log('sada');
     this.closed.emit(Form.ROLE_FORM);
   }
 
-  remove(permission){
+  remove(permission) {
     const selectedPermissions = this.selectedPermissions.value || [];
     this.selectedPermissions.patchValue(
       selectedPermissions.filter(perm => perm !== permission),
-      {emitEvent: true}
+      { emitEvent: true }
     );
   }
 
- 
+
 
   selected(event: MatAutocompleteSelectedEvent): void {
     const permission = event.option.viewValue;
@@ -60,14 +60,12 @@ export class RoleFormComponent implements OnInit {
     const selectedPermissions = this.selectedPermissions.value || [];
     this.selectedPermissions.patchValue(
       [...selectedPermissions, permission],
-      {emitEvent: true}
+      { emitEvent: true }
     );
 
   }
 
-
-  get selectedPermissions () {
-
+  get selectedPermissions() {
     return this.roleForm.get('selectedPermissions');
   }
 }

@@ -11,7 +11,6 @@ import { User } from 'src/app/app.model';
 @Injectable()
 export class AuthService {
   user$: Observable<User>;
-  private url = "http://localhost:8080";
 
   constructor(public firebaseAuth: AngularFireAuth, private afs: AngularFirestore, public router: Router) {
     this.firebaseAuth.authState.subscribe(user => {
@@ -25,12 +24,12 @@ export class AuthService {
 
     this.user$ = this.firebaseAuth.authState.pipe(switchMap(user => {
       if (user) {
-        console.log(user)
-        return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
+        console.log(user);
+        return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
       } else {
-        return of(null)
+        return of(null);
       }
-    }))
+    }));
   }
 
   login(email, password) {
