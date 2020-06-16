@@ -12,10 +12,11 @@ export class TeacherCatalogService {
                 id: '1',
                 name: 'Ionescu Anca',
                 grades: [
-                    { id: 1, gradeValue: 10, date: new Date("2018-03-16") },
+                    { id: 1, gradeValue: 10, date: new Date("2018-03-16"), absence: new Date("2018-03-17") },
                     { id: 2, gradeValue: 8, date: new Date("2018-03-21") },
                     { id: 3, gradeValue: 8, date: new Date("2018-03-21") }
                 ]
+
             },
             {
                 classroomName: 'Clasa a XI-a C',

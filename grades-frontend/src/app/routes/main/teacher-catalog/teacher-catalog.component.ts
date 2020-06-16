@@ -14,7 +14,7 @@ export class TeacherCatalogComponent implements OnInit {
   // grade: number;
   // date: Date;
 
-  displayedColumns = ['position', 'name', 'date', 'actions'];
+  displayedColumns = ['position', 'name', 'date', 'absence', 'actions'];
   students = [];
 
   public FilterClass: Object = [];
@@ -45,7 +45,7 @@ export class TeacherCatalogComponent implements OnInit {
   openDialog(action, grade, studentId) {
     const dialogRef = this.dialog.open(AddGradeComponent, {
       width: '300px',
-      height: '400px',
+      height: '420px',
       data: {
         grade: grade,
         action

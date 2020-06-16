@@ -24,6 +24,24 @@
             </td>
         </ng-container>
 
+        <ng-container matColumnDef="absence">
+            <th mat-header-cell *matHeaderCellDef width="40%"> Absence </th>
+            <td mat-cell *matCellDef="let element">
+                <mat-chip-list aria-label="absence">
+                    <span *ngFor="let grade of element.absence; let i=index">
+
+                        <mat-chip *ngIf="element.absence[i]" color="primary" selected
+                            matTooltip="{{element.absence[i].date | date:'fullDate'}}" matTooltipPosition="above">
+                            {{element.absence[i].absenceS}}
+
+                        </mat-chip>
+                    </span>
+
+
+                </mat-chip-list>
+            </td>
+        </ng-container>
+
 
 
         <ng-container matColumnDef="mean">

@@ -7,7 +7,7 @@ import { CatalogService } from './catalog.service';
   styleUrls: ['./catalog.component.scss']
 })
 export class CatalogComponent implements OnInit {
-  displayedColumns: string[] = ['object', 'grades', 'mean'];
+  displayedColumns: string[] = ['object', 'grades', 'absence', 'mean'];
   dataSource = [];
 
   constructor(private catalogService: CatalogService) { }

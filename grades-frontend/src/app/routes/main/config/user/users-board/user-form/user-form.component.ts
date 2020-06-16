@@ -33,13 +33,13 @@ export class UserFormComponent implements OnInit {
 
   onSubmit(value: any) {
     console.log(value);
-    this.closed.emit(Form.USER_FORM);
+    this.closed.emit(Form.grade_form);
     this.saved.emit(value);
   }
 
   onCancel() {
     console.log('sada');
-    this.closed.emit(Form.USER_FORM);
+    this.closed.emit(Form.grade_form);
   }
 
 }
