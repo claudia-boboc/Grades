@@ -3,14 +3,15 @@ import { HttpClient } from "@angular/common/http";
 import { tap, switchMap } from "rxjs/operators";
 import { Router } from '@angular/router';
 import { AngularFireAuth } from "@angular/fire/auth";
-import * as firebase from 'firebase/app';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, of } from 'rxjs';
-import { User } from 'src/app/app.model';
+import { User, firebaseConfig } from 'src/app/app.model';
+let firebase = require('firebase');
 
 @Injectable()
 export class AuthService {
   user$: Observable<User>;
+  app;
 
   constructor(public firebaseAuth: AngularFireAuth, private afs: AngularFirestore, public router: Router) {
     this.firebaseAuth.authState.subscribe(user => {
@@ -47,7 +48,10 @@ export class AuthService {
   }
 
   registerUser(email, password) {
-    return this.firebaseAuth.auth.createUserWithEmailAndPassword(email, password);
+    if (!this.app) {
+      this.app = firebase.initializeApp(firebaseConfig, "second");
+    }
+    return this.app.auth().createUserWithEmailAndPassword(email, password);
   }
 
   logout() {

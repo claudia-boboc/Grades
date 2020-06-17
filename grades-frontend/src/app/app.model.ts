@@ -41,3 +41,14 @@ export interface User {
     email: string;
     role: string;
 }
+
+export const firebaseConfig = {
+    apiKey: "AIzaSyBVZNzhkNknzHIczlwrMMd6bUiO1h4QvQE",
+    authDomain: "grades-61599.firebaseapp.com",
+    databaseURL: "https://grades-61599.firebaseio.com",
+    projectId: "grades-61599",
+    storageBucket: "grades-61599.appspot.com",
+    messagingSenderId: "781630341225",
+    appId: "1:781630341225:web:e8038ef95c911da53562f8",
+    measurementId: "G-WGQQ3XC9CC"
+};
