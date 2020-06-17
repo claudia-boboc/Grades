@@ -1,0 +1,8 @@
+<mat-card class="form-card">
+    <form (ngSubmit)="addSubject()" [formGroup]="form">
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Subject Name" type="text" formControlName="name">
+        </mat-form-field>
+        <button mat-button type="submit" [disabled]="!form.valid">Save</button>
+    </form>
+</mat-card>

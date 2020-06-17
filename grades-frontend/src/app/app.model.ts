@@ -31,6 +31,11 @@ export interface Student {
 
 }
 
+export interface Subject {
+    name: string,
+    id: string;
+}
+
 export enum Role {
     STUDENT = "Student",
     TEACHER = "Teacher",

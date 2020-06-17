@@ -1,12 +1,10 @@
 import { Component, Inject, Optional, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Grade } from 'src/app/app.model';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { Form } from '../config/user/users-board/users-board.model';
+import { Grade } from 'src/app/app.model';
 
 @Component({
   selector: 'app-add-grade',
@@ -17,9 +15,6 @@ export class AddGradeComponent implements OnInit {
   action: string;
   grade: Grade;
 
-  Form;
-  showForm: BehaviorSubject<Form> = new BehaviorSubject(Form.NO_FORM);
-  showForm$: Observable<Form> = this.showForm.asObservable().pipe(tap(console.log));
   form: FormGroup;
 
   _db: AngularFirestore;
@@ -36,13 +31,6 @@ export class AddGradeComponent implements OnInit {
     this._db = db;
   }
 
-  onShowUserForm() {
-    this.showForm.next(Form.grade_form);
-  }
-
-  onShowRoleForm() {
-    this.showForm.next(Form.ROLE_FORM);
-  }
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       gradeValue: [this.grade.gradeValue, [Validators.required, Validators.min(1), Validators.max(10)]],

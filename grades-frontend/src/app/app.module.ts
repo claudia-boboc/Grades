@@ -2,7 +2,6 @@
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UsersBoardComponent } from './routes/main/config/user/users-board/users-board.component';
 import { HomeComponent } from './routes/main/home/home.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,11 +14,9 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule, MatIcon } from '@angular/material/icon';
-import { UserFormComponent } from './routes/main/config/user/users-board/user-form/user-form.component'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { RoleFormComponent } from './routes/main/config/user/users-board/role-form/role-form.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { UserService } from './routes/main/config/user/users.service';
+import { ConfigBoardService } from './routes/main/config/config-board/config-board.service';
 import { LoginComponent } from './routes/main/login/login.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CatalogComponent } from './routes/main/catalog/catalog.component';
@@ -37,24 +34,24 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NavigationMenuComponent } from './navigation-bar/navigation-menu/navigation-menu.component';
 import { NavigationMenuService } from './navigation-bar/navigation-menu/navigation-menu.service';
-import { AuthenticationInterceptor } from './authentication.interceptor';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { firebaseConfig } from './app.model';
+import { ConfigBoardComponent } from './routes/main/config/config-board/config-board.component';
+import { SubjectFormComponent } from './routes/main/config/config-board/subject-form/subject-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UsersBoardComponent,
+    ConfigBoardComponent,
     HomeComponent,
-    UserFormComponent,
-    RoleFormComponent,
     LoginComponent,
     CatalogComponent,
     TeacherCatalogComponent,
     AddGradeComponent,
     NavigationBarComponent,
-    NavigationMenuComponent
+    NavigationMenuComponent,
+    SubjectFormComponent
 
   ],
   imports: [
@@ -93,11 +90,7 @@ import { firebaseConfig } from './app.model';
     MatTabsModule
   ],
 
-  providers: [UserService, AuthService, AuthGaurdService, NavigationMenuService, {
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthenticationInterceptor,
-    multi: true
-  }],
+  providers: [ConfigBoardService, AuthService, AuthGaurdService, NavigationMenuService],
   bootstrap: [AppComponent],
   entryComponents: [
     AddGradeComponent
