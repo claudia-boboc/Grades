@@ -61,7 +61,7 @@ export class NavigationMenuService {
     constructor(private http: HttpClient, private authService: AuthService) { }
 
     getMenuEntriesByCurrentUserRole() {
-        return this.authService.user$.pipe(tap(console.log), filter(user => !!user), map(
+        return this.authService.user$.pipe(filter(user => !!user), map(
             (currentUser: User) => this.getEntries(currentUser)
         ));
     }

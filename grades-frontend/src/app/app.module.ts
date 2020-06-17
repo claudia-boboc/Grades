@@ -39,6 +39,10 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { firebaseConfig } from './app.model';
 import { ConfigBoardComponent } from './routes/main/config/config-board/config-board.component';
 import { SubjectFormComponent } from './routes/main/config/config-board/subject-form/subject-form.component';
+import { ClassFormComponent } from './routes/main/config/config-board/class-form/class-form.component';
+import { StudentFormComponent } from './routes/main/config/config-board/student-form/student-form.component';
+import { TeacherFormComponent } from './routes/main/config/config-board/teacher-form/teacher-form.component';
+import { ViewDetailsComponent } from './routes/main/config/config-board/view-details/view-details.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +55,11 @@ import { SubjectFormComponent } from './routes/main/config/config-board/subject-
     AddGradeComponent,
     NavigationBarComponent,
     NavigationMenuComponent,
-    SubjectFormComponent
+    SubjectFormComponent,
+    ClassFormComponent,
+    StudentFormComponent,
+    TeacherFormComponent,
+    ViewDetailsComponent
 
   ],
   imports: [

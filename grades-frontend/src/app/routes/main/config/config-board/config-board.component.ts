@@ -39,17 +39,8 @@ export class ConfigBoardComponent implements OnInit {
       firstName: '',
       lastName: '',
       class: '',
-      subject: []
-    })
-
-    this.studentForm = this.formBuilder.group({
-      firstName: '',
-      lastName: '',
-      classroom: ''
-    })
-
-    this.classForm = this.formBuilder.group({
-      name: '',
+      subject: null,
+      classroom: null
     })
 
     this.userForm = this.formBuilder.group({
@@ -57,20 +48,31 @@ export class ConfigBoardComponent implements OnInit {
       role: ''
     });
 
-    this.subjects$ =this.configBoardService.findAllSubjects();
-    console.log(this.roles)
+    this.subjects$ = this.configBoardService.findAllSubjects();
   }
 
-  addStudent() {
+  onAddStudent(student: any) {
+    const studentUser = {
+      ...student,
+      role: 'STUDENT',
+      userType: 'STUDENT'
+    }
 
+    this.configBoardService.registerUser(studentUser);
   }
 
-  addTeacher() {
+  onAddTeacher(teacher: any) {
+    const teacherUser = {
+      ...teacher,
+      role: 'TEACHER',
+      userType: 'TEACHER'
+    }
 
+    this.configBoardService.registerUser(teacherUser);
   }
 
-  addClassroom() {
-
+  onAddClass(classroom) {
+    this.configBoardService.storeClass(classroom);
   }
 
   onAddSubject(subject) {

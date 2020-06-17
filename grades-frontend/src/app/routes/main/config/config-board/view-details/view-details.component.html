@@ -1,0 +1,86 @@
+<div *ngIf="clases$ | async as clases">
+    <mat-form-field [formGroup]="form">
+        <mat-label>Select a classroom</mat-label>
+        <mat-select formControlName="classroom">
+
+            <mat-option *ngFor="let class of clases" [value]="class">
+                {{class.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+
+<div *ngIf="students$ | async as students">
+    <div *ngIf="students.length; else noStudents">
+        <mat-table [dataSource]="students">
+            <ng-container matColumnDef="firstName">
+                <mat-header-cell *matHeaderCellDef> FirstName </mat-header-cell>
+                <mat-cell *matCellDef="let student"> {{student.firstName}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="lastName">
+                <mat-header-cell *matHeaderCellDef> LastName </mat-header-cell>
+                <mat-cell *matCellDef="let student"> {{student.lastName}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+                <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+                <mat-cell *matCellDef="let student"> {{student.email}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="classroom">
+                <mat-header-cell *matHeaderCellDef> Classroom </mat-header-cell>
+                <mat-cell *matCellDef="let student"> {{student.classroom.name}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="studentDisplayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: studentDisplayedColumns;"></mat-row>
+        </mat-table>
+    </div>
+</div>
+
+<div *ngIf="teachers$ | async as teachers">
+    <div *ngIf="teachers.length; else noTeachers">
+        <mat-table [dataSource]="teachers">
+            <ng-container matColumnDef="firstName">
+                <mat-header-cell *matHeaderCellDef> FirstName </mat-header-cell>
+                <mat-cell *matCellDef="let teacher"> {{teacher.firstName}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="lastName">
+                <mat-header-cell *matHeaderCellDef> LastName </mat-header-cell>
+                <mat-cell *matCellDef="let teacher"> {{teacher.lastName}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+                <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+                <mat-cell *matCellDef="let teacher"> {{teacher.email}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="classroom">
+                <mat-header-cell *matHeaderCellDef> Classroom </mat-header-cell>
+                <mat-cell *matCellDef="let teacher"> {{teacher.classroom.name}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="subject">
+                <mat-header-cell *matHeaderCellDef> Subject </mat-header-cell>
+                <mat-cell *matCellDef="let teacher"> {{teacher?.subject?.name}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="teacherDisplayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: teacherDisplayedColumns;"></mat-row>
+        </mat-table>
+    </div>
+</div>
+
+<ng-template #noStudents>
+    <div>
+        No students yet added for this class
+    </div>
+</ng-template>
+
+<ng-template #noTeachers>
+    <div>
+        No teachers yet added for this class
+    </div>
+</ng-template>

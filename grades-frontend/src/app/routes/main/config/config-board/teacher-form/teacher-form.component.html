@@ -1,0 +1,36 @@
+<mat-card class="form-card">
+    <form (ngSubmit)="addTeacher()" [formGroup]="form">
+        <mat-form-field class="full-width">
+            <input matInput placeholder="First Name" type="text" formControlName="firstName">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Last Name" type="text" formControlName="lastName">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <input matInput type="email" placeholder="Email" formControlName="email">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Subject</mat-label>
+            <mat-select formControlName="subject">
+
+                <mat-option *ngFor="let subject of subjects$ | async" [value]="subject">
+                    {{subject.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field><br>
+
+        <mat-form-field>
+            <mat-label>Classroom</mat-label>
+            <mat-select formControlName="classroom">
+
+                <mat-option *ngFor="let class of classes$ | async" [value]="class">
+                    {{class.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field><br>
+        <button mat-button type="submit" [disabled]="!form.valid">Save</button>
+    </form>
+</mat-card>
