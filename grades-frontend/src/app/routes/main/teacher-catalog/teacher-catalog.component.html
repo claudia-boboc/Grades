@@ -1,14 +1,16 @@
-<div class="main">
-    <mat-form-field>
-        <mat-label>Select classroom</mat-label>
-        <mat-select [(ngModel)]="ClassroomName.name" (ngModelChange)="SearchClassroom(ClassroomName.name)">
-            <mat-option *ngFor="let classroom of ClassroomName" [value]=classroom.name>
-                {{classroom.name}}
-            </mat-option>
-        </mat-select>
+<div class="teacher-catalog">
+    <div class="main">
 
-    </mat-form-field>
+        <mat-form-field>
+            <mat-label>Select classroom</mat-label>
+            <mat-select [(ngModel)]="ClassroomName.name" (ngModelChange)="SearchClassroom(ClassroomName.name)">
+                <mat-option *ngFor="let classroom of ClassroomName" [value]=classroom.name>
+                    {{classroom.name}}
+                </mat-option>
+            </mat-select>
 
+        </mat-form-field>
+    </div>
     <div class="example-container">
         <mat-accordion class="example-headers-align">
             <mat-expansion-panel *ngFor="let student of FilterClass" table (opened)="panelOpenState = true"

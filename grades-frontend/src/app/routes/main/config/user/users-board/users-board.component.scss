@@ -34,7 +34,10 @@ $primary: mat-palette($mat-indigo);
     
   }
 
-  
+  .main {
+    background-image: url("https://webgradients.com/public/webgradients_png/008%20Rainy%20Ashville.png");
+    background-size: contain;
+  }
 :host {
   ::ng-deep {
     .mat-tab-body-wrapper {

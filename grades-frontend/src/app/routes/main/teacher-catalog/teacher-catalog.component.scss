@@ -14,11 +14,11 @@
    }
 
  .example-container {
+   
    display: flex;
-   flex-direction: column;
-   width: 80%;
-   // max-height: 500px;
-   // min-width: 300px;
+justify-content: center;
+   width: 70%;
+   margin: auto;
  }
  .mat-accordion {
      width: 75%
@@ -102,5 +102,17 @@
 }
 
 .main {
-    height: 535px;
+    
+    display: flex;
+    position: relative;
+    text-align: left;
+    justify-content: center;
 }
+
+.teacher-catalog {
+    height: 89vh;
+        margin: 0px;
+    background-image: url("https://webgradients.com/public/webgradients_png/008%20Rainy%20Ashville.png  ");
+    background-size: contain;
+}
+

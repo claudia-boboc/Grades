@@ -114,9 +114,3 @@ export class TeacherCatalogComponent implements OnInit {
   }
 
 }
-
-
-
-
-
-

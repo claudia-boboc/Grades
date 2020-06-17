@@ -1,5 +1,8 @@
 <div class="dialog_container">
-
+    <mat-form-field>
+        <mat-label>Select action</mat-label>
+        <mat select></mat>
+    </mat-form-field>
     <form [formGroup]="form">
         <div mat-dialog-content>
             <mat-form-field *ngIf="action != 'Delete'; else elseTemplate ">
@@ -23,7 +26,7 @@
         Sure to delete <b>{{grade.gradeValue}}</b>?
     </ng-template>
     <div mat-dialog-action class="buttons">
-        <button mat-button (click)="doAction()">{{action}}</button>
-        <button mat-button (click)="closeDialog()" cdkFocusInitial>cancel</button>
+        <button mat-raised-button color="primary" (click)="doAction()">{{action}}</button>
+        <button mat-raised-button color="primary" (click)="closeDialog()" cdkFocusInitial>cancel</button>
     </div>
 </div>
