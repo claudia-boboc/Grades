@@ -20,6 +20,7 @@ export class TeacherCatalogComponent implements OnInit {
   public FilterClass: Object = [];
   public ClassroomName = [{ name: 'Clasa a IX-a B' }, { name: 'Clasa a X-a D' }, { name: 'Clasa a XI-a C' }, { name: 'Clasa a XII-a A' }];
 
+  public objects = [{ name: 'Matematica' }, { name: 'Romana' }];
   @ViewChild(MatTable) table: MatTable<any>;
 
   constructor(public dialog: MatDialog, private teacherCatalogService: TeacherCatalogService) {
@@ -78,8 +79,10 @@ export class TeacherCatalogComponent implements OnInit {
     student.grades = student.grades.concat([{
       id: d.getTime(),
       gradeValue: catalogEntry.gradeValue,
-      date: catalogEntry.date
+      date: catalogEntry.date,
+
     }]);
+
     this.table.renderRows();
 
   }
