@@ -3,8 +3,8 @@ import { AuthService } from "../../login/auth.service";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { User } from "src/app/app.model";
-import { of } from "rxjs";
-import { filter, tap, map } from "rxjs/operators";
+import { map } from "rxjs/operators";
+import { MatSnackBar } from '@angular/material';
 
 @Injectable({
   providedIn: "root",
@@ -15,7 +15,8 @@ export class ConfigBoardService {
   constructor(
     private authService: AuthService,
     private db: AngularFirestore,
-    public afAuth: AngularFireAuth
+    public afAuth: AngularFireAuth,
+    private snackBar: MatSnackBar
   ) {}
 
   registerUser(user: any) {
@@ -23,24 +24,36 @@ export class ConfigBoardService {
       .registerUser(user.email, this.DEFAULT_PASSWORD)
       .then((result) => {
         this.addUserToCollection(user, result.user.uid);
-        console.log(result.user);
+        this.showSnackBar(`Success: added user ${user.email}`, 'registerUser');
       })
       .catch((error) => {
-        window.alert(error.message);
+        this.showSnackBar(`ERROR: could not add user ${user.email}`, 'registerUser');
       });
   }
 
   storeSubject(subject: any) {
-    this.db.collection("subjects").add(subject);
+    this.db.collection("subjects").add(subject)
+    .then((result) => {
+      this.showSnackBar(`Success: added subject ${subject.name}`, 'storeSubject');
+    })
+    .catch((error) => {
+      this.showSnackBar(`ERROR: could not add subject ${subject.name}`, 'storeSubject');
+    });
+  }
+
+  storeClass(classroom: any) {
+    this.db.collection("classes").add(classroom)
+    .then((result) => {
+      this.showSnackBar(`Success: added classroom ${classroom.name}`, 'storeClass');
+    })
+    .catch((error) => {
+      this.showSnackBar(`ERROR: could not add classroom ${classroom.name}`, 'registerUser');
+    });
   }
 
   findAllSubjects() {
     const ref = this.db.collection("subjects");
     return ref.valueChanges({ idField: "id" });
-  }
-
-  storeClass(subject: any) {
-    this.db.collection("classes").add(subject);
   }
 
   findAllClasses() {
@@ -50,37 +63,45 @@ export class ConfigBoardService {
 
   findStudentsByClass(classroom: any) {
     const ref = this.db.collection("users");
-    return ref.valueChanges({ idField: "id" }).pipe(
-      map((students) =>
-        students.filter(
-          (student: any) =>
-            !!student &&
-            student.userType === "STUDENT" &&
-            !!student.classroom &&
-            student.classroom.id === classroom.id
+    return ref
+      .valueChanges({ idField: "id" })
+      .pipe(
+        map((students) =>
+          students.filter(
+            (student: any) =>
+              !!student &&
+              student.userType === "STUDENT" &&
+              !!student.classroom &&
+              student.classroom.id === classroom.id
+          )
         )
-      )
-    );
+      );
   }
 
   findTeachersByClass(classroom: any) {
     const ref = this.db.collection("users");
-    return ref.valueChanges({ idField: "id" }).pipe(
-      map((teachers) =>
-        teachers.filter(
-          (teacher: any) =>
-            !!teacher &&
-            teacher.userType === "TEACHER" &&
-            !!teacher.classroom &&
-            teacher.classroom.id === classroom.id
+    return ref
+      .valueChanges({ idField: "id" })
+      .pipe(
+        map((teachers) =>
+          teachers.filter(
+            (teacher: any) =>
+              !!teacher &&
+              teacher.userType === "TEACHER" &&
+              !!teacher.classroom &&
+              teacher.classroom.id === classroom.id
+          )
         )
-      )
-    );
+      );
   }
 
   private addUserToCollection(user: User, uid: string) {
     this.db.collection("users").doc(uid).set(user);
-    console.log(uid);
-    console.log(user);
+  }
+
+  private showSnackBar(message, action) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 }

@@ -1,16 +1,15 @@
-import { Component, OnInit, Inject, Input } from '@angular/core';
-import { Subject, BehaviorSubject, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { ConfigBoardService } from './config-board.service';
-import { Role, User } from 'src/app/app.model';
+import { Component, OnInit } from "@angular/core";
+import { Observable } from "rxjs";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { AngularFirestore } from "@angular/fire/firestore";
+import { AngularFireAuth } from "@angular/fire/auth";
+import { ConfigBoardService } from "./config-board.service";
+import { Role, User } from "src/app/app.model";
 
 @Component({
-  selector: 'app-config-board',
-  templateUrl: './config-board.component.html',
-  styleUrls: ['./config-board.component.scss']
+  selector: "app-config-board",
+  templateUrl: "./config-board.component.html",
+  styleUrls: ["./config-board.component.scss"],
 })
 export class ConfigBoardComponent implements OnInit {
   userForm: FormGroup;
@@ -21,42 +20,24 @@ export class ConfigBoardComponent implements OnInit {
 
   _db: AngularFirestore;
   users: Observable<any[]>;
-  roles = Object.entries(Role).map(entry => {
-    return { key: entry[0], value: entry[1] }
+  roles = Object.entries(Role).map((entry) => {
+    return { key: entry[0], value: entry[1] };
   });
 
   subjects$: Observable<any[]>;
 
-  constructor(private configBoardService: ConfigBoardService,
-    private formBuilder: FormBuilder,
-    public afAuth: AngularFireAuth, db: AngularFirestore
-  ) {
-  }
+  constructor(private configBoardService: ConfigBoardService) {}
 
   ngOnInit() {
-
-    this.teacherForm = this.formBuilder.group({
-      firstName: '',
-      lastName: '',
-      class: '',
-      subject: null,
-      classroom: null
-    })
-
-    this.userForm = this.formBuilder.group({
-      email: '',
-      role: ''
-    });
-
     this.subjects$ = this.configBoardService.findAllSubjects();
   }
 
   onAddStudent(student: any) {
     const studentUser = {
       ...student,
-      role: 'STUDENT',
-      userType: 'STUDENT'
-    }
+      role: "STUDENT",
+      userType: "STUDENT",
+    };
 
     this.configBoardService.registerUser(studentUser);
   }
@@ -64,9 +45,9 @@ export class ConfigBoardComponent implements OnInit {
   onAddTeacher(teacher: any) {
     const teacherUser = {
       ...teacher,
-      role: 'TEACHER',
-      userType: 'TEACHER'
-    }
+      role: "TEACHER",
+      userType: "TEACHER",
+    };
 
     this.configBoardService.registerUser(teacherUser);
   }
@@ -83,7 +64,7 @@ export class ConfigBoardComponent implements OnInit {
     const userFormValue = this.userForm.value;
     const user = {
       email: userFormValue.email,
-      role: userFormValue.role
+      role: userFormValue.role,
     } as User;
 
     this.configBoardService.registerUser(user);

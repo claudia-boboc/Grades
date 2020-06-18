@@ -10,7 +10,7 @@
         </div>
 
         <div fxFlex fxLayout="row" fxLayoutAlign="end center">
-
+            <span *ngIf="loggedUser | async as user">Welcome, {{user.firstName}}</span>
             <button mat-icon-button [matMenuTriggerFor]="auth">
                 <mat-icon>person_outline</mat-icon>
             </button>

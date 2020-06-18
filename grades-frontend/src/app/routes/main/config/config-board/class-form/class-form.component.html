@@ -1,8 +1,8 @@
-<mat-card class="form-card">
+<mat-card class="form-card" style="text-align: center;">
     <form (ngSubmit)="addClass()" [formGroup]="form">
         <mat-form-field class="full-width">
             <input matInput placeholder="Classroom Name" type="text" formControlName="name">
         </mat-form-field>
-        <button mat-button type="submit" [disabled]="!form.valid">Save</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Save</button>
     </form>
 </mat-card>

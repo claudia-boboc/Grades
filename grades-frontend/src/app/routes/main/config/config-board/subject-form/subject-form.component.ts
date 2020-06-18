@@ -21,6 +21,10 @@ export class SubjectFormComponent implements OnInit {
   
   addSubject() {
     this.saveSubject.emit(this.form.value);
+    this.clearForm();
   }
 
+  private clearForm() {
+    this.form.reset();
+  }
 }

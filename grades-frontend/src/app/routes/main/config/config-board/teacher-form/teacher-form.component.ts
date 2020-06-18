@@ -33,6 +33,11 @@ export class TeacherFormComponent implements OnInit {
   
   addTeacher() {
     this.saveTeacher.emit(this.form.value);
+    this.clearForm()
+  }
+
+  private clearForm() {
+    this.form.reset();
   }
 
 }

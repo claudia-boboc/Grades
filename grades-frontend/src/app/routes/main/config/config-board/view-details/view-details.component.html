@@ -1,4 +1,5 @@
-<div *ngIf="clases$ | async as clases">
+<div class="details-container">
+<div *ngIf="clases$ | async as clases" class="classroom-select">
     <mat-form-field [formGroup]="form">
         <mat-label>Select a classroom</mat-label>
         <mat-select formControlName="classroom">
@@ -10,7 +11,8 @@
     </mat-form-field>
 </div>
 
-<div *ngIf="students$ | async as students">
+<div class="details-table-container">
+<div *ngIf="students$ | async as students" class="students-table">
     <div *ngIf="students.length; else noStudents">
         <mat-table [dataSource]="students">
             <ng-container matColumnDef="firstName">
@@ -71,6 +73,8 @@
             <mat-row *matRowDef="let row; columns: teacherDisplayedColumns;"></mat-row>
         </mat-table>
     </div>
+</div>
+</div>
 </div>
 
 <ng-template #noStudents>

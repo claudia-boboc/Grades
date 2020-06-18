@@ -45,6 +45,8 @@ export enum Role {
 export interface User {
     email: string;
     role: string;
+    firstName: string;
+    lastName: string;
 }
 
 export const firebaseConfig = {

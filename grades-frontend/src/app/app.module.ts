@@ -7,7 +7,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatSidenavModule, MatListModule, MatCard, MatCardModule, MatFormField, MatFormFieldModule, MatSelectModule, MatChipsModule, MatAutocompleteModule, MatInputModule, MatDialogModule, MatNativeDateModule, MatTabsModule } from '@angular/material';
+import { MatSidenavModule, MatListModule, MatCard, MatCardModule, MatFormField, MatFormFieldModule, MatSelectModule, MatChipsModule, MatAutocompleteModule, MatInputModule, MatDialogModule, MatNativeDateModule, MatTabsModule, MatSnackBarModule } from '@angular/material';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -60,7 +60,6 @@ import { ViewDetailsComponent } from './routes/main/config/config-board/view-det
     StudentFormComponent,
     TeacherFormComponent,
     ViewDetailsComponent
-
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseConfig),
@@ -95,7 +94,8 @@ import { ViewDetailsComponent } from './routes/main/config/config-board/view-det
     CdkTableModule,
     MatTooltipModule,
     FlexLayoutModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSnackBarModule
   ],
 
   providers: [ConfigBoardService, AuthService, AuthGaurdService, NavigationMenuService],

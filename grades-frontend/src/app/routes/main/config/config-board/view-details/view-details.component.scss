@@ -1,0 +1,37 @@
+@import "~@angular/material/theming";
+
+$primary: mat-palette($mat-indigo);
+
+.details-container {
+    margin-top: 24px;
+    
+    .details-table-container {
+        display: flex;
+        margin-right: 48px;
+    }
+
+    .students-table {
+        margin-right: 24px;
+        margin-left: 48px;
+    }
+
+    .classroom-select {
+        display: flex;
+        justify-content: center;
+    }
+
+    .mat-table {
+        overflow: auto;
+        max-height: 700px;
+        border-style: groove;
+        border-color: mat-color($primary);
+      }
+    
+}
+
+.mat-footer-row,
+.mat-header-row,
+.mat-row {
+    display: inline-flex;
+    min-width: 100%;
+}

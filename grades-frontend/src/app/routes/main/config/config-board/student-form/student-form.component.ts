@@ -30,6 +30,11 @@ export class StudentFormComponent implements OnInit {
   
   addStudent() {
     this.saveStudent.emit(this.form.value);
+    this.clearForm();
+  }
+
+  private clearForm() {
+    this.form.reset();
   }
 
 }

@@ -1,4 +1,4 @@
-<mat-card class="form-card">
+<mat-card class="form-card" style="text-align: center;">
     <form (ngSubmit)="addStudent()" [formGroup]="form">
         <mat-form-field class="full-width">
             <input matInput placeholder="First Name" type="text" formControlName="firstName">
@@ -21,6 +21,6 @@
                 </mat-option>
             </mat-select>
         </mat-form-field><br>
-        <button mat-button type="submit" [disabled]="!form.valid">Save</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Save</button>
     </form>
 </mat-card>

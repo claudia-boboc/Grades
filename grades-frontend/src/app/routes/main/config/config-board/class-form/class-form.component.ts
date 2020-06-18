@@ -21,6 +21,11 @@ export class ClassFormComponent implements OnInit {
   
   addClass() {
     this.saveClass.emit(this.form.value);
+    this.clearForm();
+  }
+
+  private clearForm() {
+    this.form.reset();
   }
 
 }

@@ -25,7 +25,6 @@ export class AuthService {
 
     this.user$ = this.firebaseAuth.authState.pipe(switchMap(user => {
       if (user) {
-        console.log(user);
         return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
       } else {
         return of(null);
@@ -59,5 +58,9 @@ export class AuthService {
       localStorage.removeItem('user');
       this.router.navigate(['/login']);
     })
+  }
+
+  getCurrentUser(): any {
+    return JSON.parse(localStorage.getItem('user'));
   }
 }

@@ -1,4 +1,4 @@
-<mat-card class="form-card">
+<mat-card class="form-card" style="text-align: center;">
     <form (ngSubmit)="addTeacher()" [formGroup]="form">
         <mat-form-field class="full-width">
             <input matInput placeholder="First Name" type="text" formControlName="firstName">
@@ -12,7 +12,7 @@
             <input matInput type="email" placeholder="Email" formControlName="email">
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="full-width">
             <mat-label>Subject</mat-label>
             <mat-select formControlName="subject">
 
@@ -22,7 +22,7 @@
             </mat-select>
         </mat-form-field><br>
 
-        <mat-form-field>
+        <mat-form-field class="full-width">
             <mat-label>Classroom</mat-label>
             <mat-select formControlName="classroom">
 
@@ -31,6 +31,6 @@
                 </mat-option>
             </mat-select>
         </mat-form-field><br>
-        <button mat-button type="submit" [disabled]="!form.valid">Save</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Save</button>
     </form>
 </mat-card>
