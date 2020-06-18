@@ -13,11 +13,12 @@ export class AuthService {
   user$: Observable<User>;
   app;
 
+  authenticated = false;
+
   constructor(public firebaseAuth: AngularFireAuth, private afs: AngularFirestore, public router: Router) {
     this.firebaseAuth.authState.subscribe(user => {
       if (user) {
         localStorage.setItem('user', JSON.stringify(user));
-        this.router.navigate(['/']);
       } else {
         localStorage.setItem('user', null);
       }
@@ -34,7 +35,8 @@ export class AuthService {
 
   login(email, password) {
     this.firebaseAuth.auth.signInWithEmailAndPassword(email, password).then(value => {
-      console.log(value);
+      this.router.navigate(['/']);
+      this.authenticated = true;
     })
       .catch(err => {
         console.log('Something went wrong:', err.message);
@@ -43,7 +45,9 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
-    return (user !== null && user.email) ? true : false;
+    const firebaseAuthenticated = (user !== null && user.email) ? true : false;
+
+    return this.authenticated || firebaseAuthenticated;
   }
 
   registerUser(email, password) {
@@ -56,6 +60,7 @@ export class AuthService {
   logout() {
     return this.firebaseAuth.auth.signOut().then(() => {
       localStorage.removeItem('user');
+      this.authenticated = false;
       this.router.navigate(['/login']);
     })
   }
