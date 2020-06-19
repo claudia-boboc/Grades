@@ -43,8 +43,8 @@ export class TeacherCatalogComponent implements OnInit {
 
   ngOnInit() {
     this.classrooms$ = combineLatest(this.confgBoardService.findAllClasses(), this.authService.user$).pipe(
-      filter(([classes, user]) => user && user.userType === 'TEACHER'),
-      map(([classes, user]) => classes.filter(classroom => user.classroom && classroom.id === user.classroom.id))
+      filter(([classes, user]: [any, any]) => user && user.userType === 'TEACHER'),
+      map(([classes, user]: [any, any]) => classes.filter(classroom => user.classroom && classroom.id === user.classroom.id))
     );
   }
 
