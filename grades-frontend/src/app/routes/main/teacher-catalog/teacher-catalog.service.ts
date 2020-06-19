@@ -1,77 +1,94 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
+import { AngularFirestore } from "@angular/fire/firestore";
+import { map } from "rxjs/operators";
+import { MatSnackBar } from "@angular/material";
+import { CatalogEntry } from "src/app/app.model";
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: "root",
 })
 export class TeacherCatalogService {
+  constructor(private db: AngularFirestore, private snackBar: MatSnackBar) {}
 
-    getCatalogByClassId() {
-        return [
-            {
-                classroomName: 'Clasa a XI-a C',
-                id: '1',
-                name: 'Ionescu Anca',
-                grades: [
-                    { id: 1, gradeValue: 10, date: new Date("2018-03-16"), absence: new Date("2018-03-17") },
-                    { id: 2, gradeValue: 8, date: new Date("2018-03-21") },
-                    { id: 3, gradeValue: 8, date: new Date("2018-03-21") }
-                ]
+  findCatalogEntriesForStudent(student: any, subject: any) {
+    const ref = this.db.collection("catalogEntries");
+    return ref.valueChanges({ idField: "id" }).pipe(
+      map((catalogEntries) =>
+        catalogEntries
+          .filter(
+            (catalogEntry: any) =>
+              !!catalogEntry &&
+              catalogEntry.student.id === student.id &&
+              catalogEntry.student.classroom.id === student.classroom.id &&
+              catalogEntry.subject && catalogEntry.subject.id === subject.id
+          )
+          .map((catalogEntry: any) => ({
+            ...catalogEntry,
+            date: catalogEntry.date.toDate(),
+          }))
+      )
+    );
+  }
 
-            },
-            {
-                classroomName: 'Clasa a XI-a C',
-                id: '2',
-                name: 'Andriescu Ioana',
-                grades: [
-                    { id: 1, gradeValue: 2, date: new Date("2018-03-16") },
-                    { id: 2, gradeValue: 5, date: new Date("2018-03-16") }
-                ]
-            },
-            {
-                classroomName: 'Clasa a XI-a C',
-                id: '3',
-                name: 'Boaca Ionut',
-                grades: [
-                    { id: 1, gradeValue: 10, date: new Date("2018-03-16") },
-                    { id: 2, gradeValue: 8, date: new Date("2018-03-21") }
-                ]
-            },
-            {
-                classroomName: 'Clasa a XII-a A',
-                id: '4',
-                name: 'Teodoreanu Ionel',
-                grades: [
-                    { id: 1, gradeValue: 2, date: new Date("2018-03-16") },
-                    { id: 2, gradeValue: 5, date: new Date("2018-03-21") }
-                ]
-            },
-            {
-                classroomName: 'Clasa a XII-a A',
-                id: '5',
-                name: 'Popescu Mihaela',
-                grades: [
-                    { id: 1, gradeValue: 10, date: new Date("2018-03-16") },
-                    { id: 2, gradeValue: 8, date: new Date("2018-03-21") }
-                ]
-            },
-            {
-                classroomName: 'Clasa a XII-a A',
-                id: '6',
-                name: 'Moraru Ana',
-                grades: [
-                    { id: 1, gradeValue: 2, date: new Date("2018-03-16") },
-                    { id: 2, gradeValue: 5, date: new Date("2018-03-21") }
-                ]
-            },
-            {
-                classroomName: 'Clasa a XII-a A',
-                id: '7',
-                name: 'Grigore Madalina',
-                grades: [
-                    { id: 1, gradeValue: 9, date: new Date("2018-03-16") },
-                    { id: 2, gradeValue: 7, date: new Date("2018-03-21") }
-                ]
-            }
-        ];
-    }
+  storeCatalogEntry(catalogEntry: CatalogEntry) {
+    this.db
+      .collection("catalogEntries")
+      .add(catalogEntry)
+      .then((result) => {
+        this.showSnackBar(
+          `Success: added catalogEntry of type ${catalogEntry.type}`,
+          "storeCatalogEntry"
+        );
+      })
+      .catch((error) => {
+        this.showSnackBar(
+          `ERROR: could not add catalogEntry of type ${catalogEntry.type}`,
+          "storeCatalogEntry"
+        );
+      });
+  }
+
+  updateCatalogEntry(catalogEntry: CatalogEntry) {
+    this.db
+      .collection("catalogEntries")
+      .doc(catalogEntry.id)
+      .set(catalogEntry, { merge: true })
+      .then((result) => {
+        this.showSnackBar(
+          `Success: updated catalogEntry of type ${catalogEntry.type}`,
+          "updateCatalogEntry"
+        );
+      })
+      .catch((error) => {
+        this.showSnackBar(
+          `ERROR: could not update catalogEntry of type ${catalogEntry.type}`,
+          "updateCatalogEntry"
+        );
+      });
+  }
+
+  deleteCatalogEntry(catalogEntry: CatalogEntry) {
+    this.db
+      .collection("catalogEntries")
+      .doc(catalogEntry.id)
+      .delete()
+      .then((result) => {
+        this.showSnackBar(
+          `Success: deleted catalogEntry of type ${catalogEntry.type}`,
+          "deleteCatalogEntry"
+        );
+      })
+      .catch((error) => {
+        this.showSnackBar(
+          `ERROR: could not delete catalogEntry of type ${catalogEntry.type}`,
+          "deleteCatalogEntry"
+        );
+      });
+  }
+
+  private showSnackBar(message, action) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
 }

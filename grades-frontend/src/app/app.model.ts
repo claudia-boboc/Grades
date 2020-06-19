@@ -18,6 +18,21 @@ export interface Grade {
     absence?: Date[];
 }
 
+export interface CatalogEntry {
+    id?: string;
+    type: string;
+    gradeValue: number;
+    date: Date;
+    student?: any;
+    teacher?: any;
+    subject?: any;
+}
+
+export enum CatalogEntryType {
+    GRADE = "Grade",
+    ABSENCE = "Absence"
+}
+
 export interface Classroom {
     id: number;
     name: String;

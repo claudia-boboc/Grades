@@ -22,7 +22,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CatalogComponent } from './routes/main/catalog/catalog.component';
 import { MatTableModule } from '@angular/material/table';
 import { TeacherCatalogComponent } from './routes/main/teacher-catalog/teacher-catalog.component';
-import { AddGradeComponent } from './routes/main/add-grade/add-grade.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
@@ -43,6 +42,8 @@ import { ClassFormComponent } from './routes/main/config/config-board/class-form
 import { StudentFormComponent } from './routes/main/config/config-board/student-form/student-form.component';
 import { TeacherFormComponent } from './routes/main/config/config-board/teacher-form/teacher-form.component';
 import { ViewDetailsComponent } from './routes/main/config/config-board/view-details/view-details.component';
+import { GradeListComponent } from './routes/main/teacher-catalog/grade-list/grade-list.component';
+import { AddGradeComponent } from './routes/main/teacher-catalog/add-grade/add-grade.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { ViewDetailsComponent } from './routes/main/config/config-board/view-det
     ClassFormComponent,
     StudentFormComponent,
     TeacherFormComponent,
-    ViewDetailsComponent
+    ViewDetailsComponent,
+    GradeListComponent
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseConfig),

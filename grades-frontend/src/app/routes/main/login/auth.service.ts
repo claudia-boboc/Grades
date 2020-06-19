@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { tap, switchMap } from "rxjs/operators";
+import { tap, switchMap, map } from "rxjs/operators";
 import { Router } from '@angular/router';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -26,7 +26,7 @@ export class AuthService {
 
     this.user$ = this.firebaseAuth.authState.pipe(switchMap(user => {
       if (user) {
-        return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+        return this.afs.doc<User>(`users/${user.uid}`).valueChanges().pipe(map(foundUser => ({...foundUser, id: user.uid})));
       } else {
         return of(null);
       }

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CatalogService } from './catalog.service';
+import { Observable } from 'rxjs';
+import { AuthService } from '../login/auth.service';
+import { filter, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-catalog',
@@ -8,12 +11,16 @@ import { CatalogService } from './catalog.service';
 })
 export class CatalogComponent implements OnInit {
   displayedColumns: string[] = ['object', 'grades', 'absence', 'mean'];
-  dataSource = [];
+  catalog$: Observable<any>;
+  student: any;
 
-  constructor(private catalogService: CatalogService) { }
+  constructor(private authService:AuthService, private catalogService: CatalogService) { }
 
   ngOnInit() {
-    this.dataSource = this.catalogService.getCatalogByStudentId(null);
+    this.catalog$ = this.authService.user$.pipe(
+      filter(user => user && user.userType === 'STUDENT'),
+      switchMap(student => this.catalogService.findCatalogEntriesForStudent(student))
+    );
   }
 
 

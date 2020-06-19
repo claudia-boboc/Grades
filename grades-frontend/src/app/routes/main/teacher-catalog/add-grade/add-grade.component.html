@@ -2,19 +2,17 @@
 
     <form [formGroup]="form">
         <div mat-dialog-content>
-            <mat-form-field *ngIf="action == 'Delete'">
-                Sure to delete <b>{{grade.gradeValue}}</b>
+            <div *ngIf="action == 'Delete'">
+                Sure to delete <b>{{catalogEntry.gradeValue || catalogEntry.type}}</b>
                 <div mat-dialog-action class="buttons">
                     <button mat-raised-button color="primary" (click)="doAction()">{{action}}</button>
                     <button mat-raised-button color="primary" (click)="closeDialog()" cdkFocusInitial>cancel</button>
                 </div>
-            </mat-form-field>
+            </div>
 
             <div *ngIf="action == 'Update'">
-                <mat-form-field>
-                    <input autocomplete="off" type="number" min="1" max="10" matInput placeholder="Grade"
-                        formControlName="gradeValue" #grade>
-                </mat-form-field>
+                <input autocomplete="off" type="number" min="1" max="10" matInput placeholder="Grade"
+                    formControlName="gradeValue" #grade>
                 <mat-form-field>
                     <mat-label>Choose a date</mat-label>
                     <input matInput [matDatepicker]="picker" formControlName="date" #date>
@@ -30,10 +28,10 @@
             <div *ngIf="action === 'Add'">
                 <div class="selectOptions">
                     <mat-form-field>
-                        <mat-label>Select action</mat-label>
-                        <mat-select [(value)]="selectOptions">
-                            <mat-option *ngFor="let option of options" [value]=option.name>
-                                {{option.name}}
+                        <mat-label>Type</mat-label>
+                        <mat-select formControlName="type">
+                            <mat-option *ngFor="let option of options" [value]=option.key>
+                                {{option.value}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -41,7 +39,7 @@
                 </div>
                 <div class="formm">
 
-                    <mat-form-field *ngIf="selectOptions === 'Add Grade'" class="grade">
+                    <mat-form-field *ngIf="showGrade" class="grade">
                         <input autocomplete="off" type="number" min="1" max="10" matInput placeholder="Grade"
                             formControlName="gradeValue">
                     </mat-form-field>
@@ -65,33 +63,3 @@
 
 
 </div>
-
-<!-- <div class="dialog_container">
-    <form [formGroup]="form">
-        <div mat-dialog-content>
-            <mat-form-field *ngIf="action != 'Delete' ; else elseTemplate ">
-
-                <input autocomplete="off" type="number" min="1" max="10" matInput placeholder="Grade"
-                    formControlName="gradeValue" #grade>
-
-            </mat-form-field>
-
-            <mat-form-field class="date" *ngIf="action != 'Delete'; else ">
-
-                <mat-label>Choose a date</mat-label>
-                <input matInput [matDatepicker]="picker" formControlName="date" #date>
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-
-        </div>
-    </form>
-
-    <ng-template #elseTemplate>
-        Sure to delete <b>{{grade.gradeValue}}</b>?
-    </ng-template>
-    <div mat-dialog-action class="buttons">
-        <button mat-raised-button color="primary" (click)="doAction()">{{action}}</button>
-        <button mat-raised-button color="primary" (click)="closeDialog()" cdkFocusInitial>cancel</button>
-    </div>
-</div> -->
