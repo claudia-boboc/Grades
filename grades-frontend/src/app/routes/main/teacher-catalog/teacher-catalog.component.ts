@@ -46,11 +46,11 @@ export class TeacherCatalogComponent implements OnInit {
 
   private initTeacherSubject() {
     this.authService.user$.pipe(
-      filter(user => user && user.userType === 'TEACHER'),
-      map(teacher => teacher.subject)
+      filter((user: any) => user && user.userType === 'TEACHER'),
+      map((teacher: any) => teacher.subject)
     ).subscribe(subject => {
       this.subjects = [subject];
-      this.form.patchValue({subject});
+      this.form.patchValue({ subject });
     });
   }
 }

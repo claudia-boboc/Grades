@@ -11,14 +11,14 @@ import { filter, switchMap } from 'rxjs/operators';
 })
 export class CatalogComponent implements OnInit {
   displayedColumns: string[] = ['object', 'grades', 'absence', 'mean'];
-  catalog$: Observable<any>;
+  catalog$: Observable<any[]>;
   student: any;
 
-  constructor(private authService:AuthService, private catalogService: CatalogService) { }
+  constructor(private authService: AuthService, private catalogService: CatalogService) { }
 
   ngOnInit() {
     this.catalog$ = this.authService.user$.pipe(
-      filter(user => user && user.userType === 'STUDENT'),
+      filter((user: any) => user && user.userType === 'STUDENT'),
       switchMap(student => this.catalogService.findCatalogEntriesForStudent(student))
     );
   }

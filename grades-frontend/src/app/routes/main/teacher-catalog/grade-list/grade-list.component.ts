@@ -14,7 +14,7 @@ export class GradeListComponent implements OnInit {
   @Input() student: any;
   @Input() subject: any;
 
-  catalogEntries$: Observable<CatalogEntry>;
+  catalogEntries$: Observable<any>;
 
   CatalogEntryType;
 
@@ -25,7 +25,7 @@ export class GradeListComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private teacherCatalogService: TeacherCatalogService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.catalogEntries$ = this.teacherCatalogService.findCatalogEntriesForStudent(
