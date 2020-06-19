@@ -13,6 +13,7 @@ import { AddGradeComponent } from "../add-grade/add-grade.component";
 export class GradeListComponent implements OnInit {
   @Input() student: any;
   @Input() subject: any;
+  @Input() teacher: any;
 
   catalogEntries$: Observable<any>;
 
@@ -37,7 +38,7 @@ export class GradeListComponent implements OnInit {
   openDialog(action, catalogEntry) {
     const dialogRef = this.dialog.open(AddGradeComponent, {
       width: "300px",
-      height: "420px",
+      height: "auto",
       data: {
         catalogEntry,
         action,
@@ -61,7 +62,8 @@ export class GradeListComponent implements OnInit {
     this.teacherCatalogService.storeCatalogEntry({
       ...catalogEntry,
       student: this.student,
-      subject: this.subject
+      subject: this.subject,
+      teacher: this.teacher
     });
     this.table.renderRows();
   }

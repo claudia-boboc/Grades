@@ -1,11 +1,38 @@
-.table  {
-    width: 80%;
-    font-size: 7px;
-   }
-   #btn {
-       position: relative;
-       margin-left: 90%;
-       background-color: grey;
-       margin-top: 2%;
-      
-   }
+.table {
+  width: 80%;
+  font-size: 7px;
+}
+#btn {
+  position: relative;
+  margin-left: 90%;
+  background-color: grey;
+  margin-top: 2%;
+}
+
+.mat-raised-button {
+  width: 20px;
+}
+
+.btn {
+  margin-top: 12px;
+  margin-left: 90%;
+}
+
+.mat-dialog-container {
+  width: 300px;
+}
+
+.mat-row {
+  min-height: 28px;
+}
+
+.mat-cell {
+  font-size: 12px;
+  text-align: center;
+  justify-content: center;
+}
+
+.mat-header-cell {
+  flex-direction: column;
+  justify-content: center;
+}

@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ConfigBoardService } from "../config/config-board/config-board.service";
-import { Observable } from "rxjs";
+import { Observable, combineLatest } from "rxjs";
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { filter, switchMap, map, tap } from "rxjs/operators";
+import { filter, switchMap, map, tap, withLatestFrom } from "rxjs/operators";
 import { AuthService } from '../login/auth.service';
 
 @Component({
@@ -15,6 +15,7 @@ export class TeacherCatalogComponent implements OnInit {
 
   classrooms$: Observable<any>;
   students$: Observable<any>;
+  teacher: any;
 
   subjects: any[];
 
@@ -41,16 +42,20 @@ export class TeacherCatalogComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.classrooms$ = this.confgBoardService.findAllClasses();
+    this.classrooms$ = combineLatest(this.confgBoardService.findAllClasses(), this.authService.user$).pipe(
+      filter(([classes, user]) => user && user.userType === 'TEACHER'),
+      map(([classes, user]) => classes.filter(classroom => user.classroom && classroom.id === user.classroom.id))
+    );
   }
 
   private initTeacherSubject() {
     this.authService.user$.pipe(
       filter((user: any) => user && user.userType === 'TEACHER'),
-      map((teacher: any) => teacher.subject)
-    ).subscribe(subject => {
-      this.subjects = [subject];
-      this.form.patchValue({ subject });
+      tap(console.log)
+    ).subscribe(teacher => {
+      this.subjects = [teacher.subject];
+      this.teacher = teacher;
+      this.form.patchValue({ subject: teacher.subject });
     });
   }
 }

@@ -19,6 +19,11 @@ export class NavigationMenuService {
             title: 'View grades',
             icon: 'dashboard',
             route: '/catalog'
+        },
+        {
+            title: 'Account info',
+            icon: 'account_circle',
+            route: '/accountInfo'
         }
     ];
 
@@ -32,6 +37,11 @@ export class NavigationMenuService {
             title: 'Catalog',
             icon: 'dashboard',
             route: '/teachercatalog'
+        },
+        {
+            title: 'Account info',
+            icon: 'account_circle',
+            route: '/accountInfo'
         }
     ];
 
@@ -55,6 +65,11 @@ export class NavigationMenuService {
             title: 'View grades',
             icon: 'dashboard',
             route: '/catalog'
+        },
+        {
+            title: 'Account info',
+            icon: 'account_circle',
+            route: '/accountInfo'
         }
     ];
 

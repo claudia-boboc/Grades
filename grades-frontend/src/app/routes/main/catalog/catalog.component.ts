@@ -10,7 +10,7 @@ import { filter, switchMap } from 'rxjs/operators';
   styleUrls: ['./catalog.component.scss']
 })
 export class CatalogComponent implements OnInit {
-  displayedColumns: string[] = ['object', 'grades', 'absence', 'mean'];
+  displayedColumns: string[] = ['subject', 'teacher', 'grades', 'absence', 'mean'];
   catalog$: Observable<any[]>;
   student: any;
 
@@ -22,6 +22,4 @@ export class CatalogComponent implements OnInit {
       switchMap(student => this.catalogService.findCatalogEntriesForStudent(student))
     );
   }
-
-
 }

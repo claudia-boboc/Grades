@@ -48,19 +48,26 @@ export class CatalogService {
             mappedEntries[catalogEntry.subject.id] = {
                 grades: catalogEntry.type === 'GRADE' ? [catalogEntry] : [],
                 absences: catalogEntry.type === 'ABSENCE' ? [catalogEntry] : [],
-                subject: catalogEntry.subject.name
+                subject: catalogEntry.subject.name,
+                teacher: catalogEntry.teacher && `${catalogEntry.teacher.lastName} ${catalogEntry.teacher.firstName}` 
             };
         }
     });
-    
-    return Object.values(mappedEntries);
+
+    const mappedEntriesList = Object.values(mappedEntries);
+    mappedEntriesList.forEach((entry: any) => entry.mean = this.calculateMean(entry.grades));
+    console.log(mappedEntriesList)
+    return mappedEntriesList;
   }
 
-    getCatalogByStudentId(studentId: string) {
-        return [
-            { object: 'Matematica', grades: [{ gradeValue: 8, date: new Date("2018-03-03") }, { gradeValue: 7, date: new Date("2018-05-03") }], mean: 8, absence: [{ date: new Date("2018-05-03"), absenceS: "Absent" }] },
-            { object: 'Limba si literatura romana', grades: [{ gradeValue: 6, date: new Date("2018-03-03") }, { gradeValue: 7, date: new Date("2018-05-03") }, { gradeValue: 9, date: new Date("2018-05-03") }], mean: 9 }
+  private calculateMean(grades: any[]) {
+      if(!grades || !grades.length) {
+          return 0;
+      }
 
-        ]
-    }
+      let sum = 0;
+      grades.forEach(grade => sum += grade.gradeValue);
+
+      return sum / grades.length
+  }
 }

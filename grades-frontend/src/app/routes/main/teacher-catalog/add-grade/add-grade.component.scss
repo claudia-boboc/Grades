@@ -1,23 +1,24 @@
 .dialog_container {
     text-align: -webkit-center;
     justify-content: center;
-    margin-top: 40%;
-   
-}
-.buttons {
     margin-top: 10%;
+   margin-bottom: 10%;
+
+   .buttons {
+    margin-top: 10%;
+    display: flex;
+    justify-content: center;
 }
 .date {
-    width: 71%;
-}
-:host {
-    width: 300px;
-    height: 420px;
+    width: 75%;
 }
 
-.select {
-    width: 50%;
-    display: flex;
-    margin: auto;
-    justify-content: center;
+button {
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+.full-width {
+    width: 80%;
+}
 }

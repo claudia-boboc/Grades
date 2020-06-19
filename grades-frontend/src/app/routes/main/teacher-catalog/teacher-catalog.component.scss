@@ -1,108 +1,77 @@
-
-   .mat-card {
-     width: 85%;
-   }
-
- .example-container {
-   
-   display: flex;
-justify-content: center;
-   width: 70%;
-   margin: auto;
- }
- .mat-accordion {
-     width: 75%
- }
-
- .example-headers-align .mat-expansion-panel-header-description {
-   justify-content: flex-end;
-//    align-items: center;
- }
- 
-
- 
- .example-headers-align .mat-expansion-panel-header-title,
- .example-headers-align .mat-expansion-panel-header-description {
-   flex-basis: 0;
- }
-
- .mat-icon-button {
-    vertical-align: middle;
- }
- 
- .mat-column-actions {
-     justify-content: flex-end;
- }
-
- .mat-cell {
-     padding-right: 0px;
- }
-
- .mat-column-date, .mat-column-absence {
-     justify-content: center;
- }
-
- mat-cell:nth-child(3),
- mat-header-cell:nth-child(3) {
-     flex: 0 0 25%;
- }
-
-.table-row {
-    min-height: 10px;
+.mat-card {
+  width: 85%;
 }
 
-.mat-icon {
-    font-size: 14px;
+.example-container {
+  display: flex;
+  justify-content: center;
+  width: 70%;
+  margin: auto;
 }
 
-.account_circle {
-    font-size: 19px;
-    position: absolute;
+.mat-accordion {
+  width: 75%;
 }
-.mat-row {
-    min-height: 28px;
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: flex-end;
+}
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.mat-icon-button {
+  vertical-align: middle;
+}
+
+.mat-column-actions {
+  justify-content: flex-end;
 }
 
 .mat-cell {
-    font-size: 12px;
+  padding-right: 0px;
 }
 
-.mat-raised-button {
-    width: 20px ;
+.mat-column-date,
+.mat-column-absence {
+  justify-content: center;
 }
 
-.btn {
-    
-        width: 15px;
-        height: 20px;
-        line-height: 20px;
-        min-height: 20px;
-        min-width: 28px;
-        vertical-align: top;
-        font-size: 10px;
-        padding: 0 0;
-        margin: 0;
-      position: relative;
-      margin-left: 96%;
-      margin-top: 5px;
+mat-cell:nth-child(3),
+mat-header-cell:nth-child(3) {
+  flex: 0 0 25%;
 }
 
-.mat-dialog-container {
-    width: 300px;
+.table-row {
+  min-height: 10px;
+}
+
+.mat-icon {
+  font-size: 14px;
+}
+
+.account_circle {
+  font-size: 19px;
+  position: absolute;
 }
 
 .main {
-    
-    display: flex;
-    position: relative;
-    text-align: left;
-    justify-content: center;
+  display: flex;
+  position: relative;
+  text-align: left;
+  justify-content: center;
+  padding-top: 24px;
 }
 
 .teacher-catalog {
-    height: 89vh;
-        margin: 0px;
-    background-image: url("https://webgradients.com/public/webgradients_png/008%20Rainy%20Ashville.png  ");
-    background-size: contain;
+  height: 89vh;
+  margin: 0px;
+  background-image: url("https://webgradients.com/public/webgradients_png/008%20Rainy%20Ashville.png  ");
+  background-size: contain;
 }
 
+.form-field {
+    margin-right: 24px;
+}

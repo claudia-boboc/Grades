@@ -1,12 +1,17 @@
 <div class="catalog-container">
     <table mat-table [dataSource]="catalog$ | async" class="table">
-        <ng-container matColumnDef="object">
-            <th mat-header-cell *matHeaderCellDef width="40%"> Class </th>
+        <ng-container matColumnDef="subject">
+            <th mat-header-cell *matHeaderCellDef width="15%"> Subject </th>
             <td mat-cell *matCellDef="let element"> {{element.subject}} </td>
         </ng-container>
 
+        <ng-container matColumnDef="teacher">
+            <th mat-header-cell *matHeaderCellDef width="10%"> Teacher </th>
+            <td mat-cell *matCellDef="let element"> {{element.teacher}} </td>
+        </ng-container>
+
         <ng-container matColumnDef="grades">
-            <th mat-header-cell *matHeaderCellDef width="50%"> Grades </th>
+            <th mat-header-cell *matHeaderCellDef width="30%"> Grades </th>
             <td mat-cell *matCellDef="let element">
                 <mat-chip-list aria-label="grades">
                     <span *ngFor="let grade of element.grades; let i=index">
@@ -25,14 +30,14 @@
         </ng-container>
 
         <ng-container matColumnDef="absence">
-            <th mat-header-cell *matHeaderCellDef width="40%"> Absence </th>
+            <th mat-header-cell *matHeaderCellDef width="30%"> Absence </th>
             <td mat-cell *matCellDef="let element">
                 <mat-chip-list aria-label="absence">
                     <span *ngFor="let absence of element.absences; let i=index">
 
                         <mat-chip *ngIf="absence" color="primary" selected
                             matTooltip="{{absence.date | date:'fullDate'}}" matTooltipPosition="above">
-                            {{absence.absenceS}}
+                            Absence
 
                         </mat-chip>
                     </span>
@@ -45,9 +50,9 @@
 
 
         <ng-container matColumnDef="mean">
-            <th mat-header-cell *matHeaderCellDef> Mean </th>
+            <th mat-header-cell *matHeaderCellDef width="5%"> Mean </th>
 
-            <td mat-cell *matCellDef="let element">{{element.mean}}
+            <td mat-cell *matCellDef="let element">{{element.mean | number: '1.2-2'}}
             </td>
 
         </ng-container>

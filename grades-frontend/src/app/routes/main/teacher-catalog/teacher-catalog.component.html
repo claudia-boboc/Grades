@@ -1,6 +1,6 @@
 <div class="teacher-catalog">
     <div class="main">
-        <mat-form-field [formGroup]="form">
+        <mat-form-field [formGroup]="form" class="form-field">
             <mat-label>Select classroom</mat-label>
             <mat-select formControlName="classroom">
                 <mat-option *ngFor="let classroom of classrooms$ | async" [value]=classroom>
@@ -31,7 +31,7 @@
                         <mat-icon class="account_circle">account_circle</mat-icon>
                     </mat-panel-description>
                 </mat-expansion-panel-header>
-                <app-grade-list [student]="student" [subject]=subjects[0]></app-grade-list>
+                <app-grade-list [student]="student" [subject]=subjects[0] [teacher]="teacher"></app-grade-list>
             </mat-expansion-panel>
         </mat-accordion>
     </div>
