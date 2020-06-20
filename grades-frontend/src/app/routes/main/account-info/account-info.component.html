@@ -1,14 +1,29 @@
 <div class="account-info-container">
     <mat-card *ngIf="user$ | async as userDetails" class="account-info-card">
         <mat-card-header>
-            <span>Account details </span>
+            <span class="details-header">Account details </span>
         </mat-card-header>
         <mat-card-content>
             <div fxLayout="column" class="user-details-container">
-                <span fxLayout="row" *ngIf="userDetails.lastName">Last name: {{userDetails.lastName}}</span>
-                <span fxLayout="row" *ngIf="userDetails.firstName">First name: {{userDetails.firstName}}</span>
-                <span fxLayout="row" *ngIf="userDetails.classroom">Classroom: {{userDetails.classroom?.name}}</span>
-                <span fxLayout="row" *ngIf="userDetails.subject">Subject teached: {{userDetails.subject?.name}}</span>
+                <div *ngIf="userDetails.lastName" fxLayout="row">
+                    <span fxLayout="row" class="detail-label">Last name:</span>
+                    <span fxLayout="row" class="detail-value">{{userDetails.lastName}}</span>
+                </div>
+
+                <div *ngIf="userDetails.firstName" fxLayout="row">
+                    <span fxLayout="row" class="detail-label">First name:</span>
+                    <span fxLayout="row" class="detail-value">{{userDetails.firstName}}</span>
+                </div>
+
+                <div *ngIf="userDetails.classroom?.name" fxLayout="row">
+                    <span fxLayout="row" class="detail-label">Classroom:</span>
+                    <span fxLayout="row" class="detail-value">{{userDetails.classroom?.name}}</span>
+                </div>
+
+                <div *ngIf="userDetails.subject?.name" fxLayout="row">
+                    <span fxLayout="row" class="detail-label">Subject teached:</span>
+                    <span fxLayout="row" class="detail-value">{{userDetails.subject?.name}}</span>
+                </div>
             </div>
             
         </mat-card-content>

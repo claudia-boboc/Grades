@@ -30,9 +30,11 @@
 }
 
 .d {
-  height: 89vh;
-  background-image: url("https://webgradients.com/public/webgradients_png/008%20Rainy%20Ashville.png");
-  background-size: contain;
+  height:auto;
+	min-height:93vh;
+	background-image: url("https://webgradients.com/public/webgradients_png/008%20Rainy%20Ashville.png");
+	background-size:cover;
+	background-position:center;
 }
 
 .card {

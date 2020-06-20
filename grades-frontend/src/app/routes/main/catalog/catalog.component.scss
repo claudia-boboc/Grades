@@ -1,29 +1,21 @@
 table {
-    width: 70%;
-  }
+  width: 70%;
+}
 .catalog-container {
-  height: 100%;
-  }
+  height: auto;
+  min-height: 93vh;
+  background-image: url("https://webgradients.com/public/webgradients_png/008%20Rainy%20Ashville.png");
+  background-size: cover;
+  background-position: center;
+  padding-top: 12px;
+}
 
-  .mat-column-grades {
-    width: 35%;
-  }
+.mat-column-grades {
+  width: 35%;
+}
 
-  .table {
-  
-     
-    position: absolute;
-    // text-align: left;
-    // justify-content: center;
-    margin-top: 7%;
-    margin-left: 15%;
-  
-  }
-
-  .catalog-container {
-    height: 89vh;
-    background-image: url("https://webgradients.com/public/webgradients_png/008%20Rainy%20Ashville.png");
-    background-size: contain;
-  }
-
- 
+.table {
+  position: relative;
+  margin-top: 7%;
+  margin-left: 15%;
+}

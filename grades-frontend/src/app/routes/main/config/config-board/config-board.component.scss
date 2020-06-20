@@ -1,40 +1,39 @@
 .main {
-    height: 535px;
+  height: 535px;
+  height: auto;
+  min-height: 93vh;
+  background-image: url("https://webgradients.com/public/webgradients_png/008%20Rainy%20Ashville.png");
+  background-size: cover;
+  background-position: center;
 }
 
-
-@import '~@angular/material/theming';
+@import "~@angular/material/theming";
 
 $primary: mat-palette($mat-indigo);
 
+.form-card {
+  // max-width: 400px;
+  border: 2px solid mat-color($primary);
+  border-radius: 30px !important;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.mat-tab-group {
+  align-items: center;
+}
+
+.mat-card {
+  margin-top: 35px;
+}
 
 .form-card {
-    // max-width: 400px;
-    border: 2px solid mat-color($primary);
-    border-radius: 30px !important;
-  }
+  height: 215px;
+  width: 280px;
+}
 
-  .full-width {
-    width: 100%;
-   
-  }
-
-  .mat-tab-group {
-    align-items: center;
-   
-  }
-
-  .mat-card {
-      margin-top: 35px;
-  }
-
-  .form-card {
-    height: 215px;
-    width: 280px;
-    
-  }
-
-  
 :host {
   ::ng-deep {
     .mat-tab-body-wrapper {
